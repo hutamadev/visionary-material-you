@@ -1,36 +1,38 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-const Card = React.forwardRef<
-  HTMLElement,
-  React.HTMLAttributes<HTMLElement> & {
-    variant?: 'filled' | 'elevated' | 'outlined'
-    as?: 'div' | 'article' | 'section' | 'li'
-  }
->(({ className, variant = 'filled', as = 'div', ...props }, ref) => {
-  const variantStyles = {
-    filled: "bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)]",
-    elevated: "bg-[var(--md-sys-color-surface-container-high)] shadow-lg shadow-[var(--md-sys-color-shadow)] border border-transparent",
-    outlined: "bg-transparent border border-[var(--md-sys-color-outline-variant)]",
-  }
+export type CardVariant = 'filled' | 'elevated' | 'outlined'
+export type CardTag = 'div' | 'article' | 'section' | 'li'
 
-  const Component = as as 'div'
+export interface CardProps extends React.HTMLAttributes<HTMLElement> {
+  readonly variant?: CardVariant
+  readonly as?: CardTag
+}
 
-  return (
-    <Component
-      ref={ref as any}
-      className={cn(
+export const Card = React.forwardRef<HTMLElement, CardProps>(
+  ({ className, variant = 'filled', as = 'div', ...props }, ref) => {
+    const variantStyles: Record<CardVariant, string> = {
+      filled: "bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)]",
+      elevated: "bg-[var(--md-sys-color-surface-container-high)] shadow-lg shadow-[var(--md-sys-color-shadow)] border border-transparent",
+      outlined: "bg-transparent border border-[var(--md-sys-color-outline-variant)]",
+    }
+
+    const Tag = as
+
+    return React.createElement(Tag, {
+      ref,
+      className: cn(
         "rounded-3xl p-6 sm:p-8 transition-all duration-300 text-[var(--md-sys-color-on-surface)]",
         variantStyles[variant],
         className
-      )}
-      {...props}
-    />
-  )
-})
+      ),
+      ...props,
+    })
+  }
+)
 Card.displayName = "Card"
 
-const CardHeader = React.forwardRef<
+export const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -42,7 +44,7 @@ const CardHeader = React.forwardRef<
 ))
 CardHeader.displayName = "CardHeader"
 
-const CardTitle = React.forwardRef<
+export const CardTitle = React.forwardRef<
   HTMLHeadingElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
@@ -57,7 +59,7 @@ const CardTitle = React.forwardRef<
 ))
 CardTitle.displayName = "CardTitle"
 
-const CardDescription = React.forwardRef<
+export const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
@@ -69,7 +71,7 @@ const CardDescription = React.forwardRef<
 ))
 CardDescription.displayName = "CardDescription"
 
-const CardContent = React.forwardRef<
+export const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -77,7 +79,7 @@ const CardContent = React.forwardRef<
 ))
 CardContent.displayName = "CardContent"
 
-const CardFooter = React.forwardRef<
+export const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
@@ -88,5 +90,3 @@ const CardFooter = React.forwardRef<
   />
 ))
 CardFooter.displayName = "CardFooter"
-
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }

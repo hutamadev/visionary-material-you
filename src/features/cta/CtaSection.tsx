@@ -1,15 +1,35 @@
-import { useState, type FormEvent } from 'react'
-import { Sparkles, CheckCircle, Send } from 'lucide-react'
+import { useState, type FormEvent, type ChangeEvent } from 'react'
+import { Sparkles, CheckCircle, Send, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { ctaEmailSchema } from '@/lib/validations/cta.schema'
 
 export function CtaSection() {
   const [email, setEmail] = useState('')
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setEmail(e.target.value)
+    if (errorMessage) {
+      setErrorMessage(null)
+    }
+  }
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
+
+    const validationResult = ctaEmailSchema.safeParse({ email })
+
+    if (!validationResult.success) {
+      const firstIssue = validationResult.error.issues[0]
+      setErrorMessage(firstIssue?.message ?? 'Invalid email address')
+      return
+    }
+
+    setErrorMessage(null)
     setSubmitted(true)
+
     setTimeout(() => {
       setEmail('')
       setSubmitted(false)
@@ -40,40 +60,55 @@ export function CtaSection() {
             </p>
           </div>
 
-          {/* Quick Submit Form */}
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-            <label htmlFor="cta-email" className="sr-only">
-              Work Email Address
-            </label>
-            <Input
-              id="cta-email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              aria-label="Work email address"
-              placeholder="Enter your work email..."
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="bg-[var(--md-sys-color-surface)]/80 text-[var(--md-sys-color-on-surface)] border-transparent focus-visible:border-[var(--md-sys-color-primary)] placeholder:text-[var(--md-sys-color-on-surface-variant)] shadow-sm"
-            />
-            <Button
-              type="submit"
-              variant="default"
-              className="whitespace-nowrap gap-2 bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)] shadow-md hover:scale-105"
-            >
-              {submitted ? (
-                <>
-                  <CheckCircle className="w-4 h-4" aria-hidden="true" />
-                  <span>Received!</span>
-                </>
-              ) : (
-                <>
-                  <span>Consult Now</span>
-                  <Send className="w-4 h-4" aria-hidden="true" />
-                </>
-              )}
-            </Button>
+          {/* Quick Submit Form with Zod Validation */}
+          <form onSubmit={handleSubmit} noValidate className="max-w-md mx-auto space-y-2">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <label htmlFor="cta-email" className="sr-only">
+                Work Email Address
+              </label>
+              <Input
+                id="cta-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                aria-label="Work email address"
+                aria-invalid={errorMessage !== null}
+                aria-describedby={errorMessage ? 'cta-email-error' : undefined}
+                placeholder="Enter your work email..."
+                value={email}
+                onChange={handleInputChange}
+                required
+                className="bg-[var(--md-sys-color-surface)]/80 text-[var(--md-sys-color-on-surface)] border-transparent focus-visible:border-[var(--md-sys-color-primary)] placeholder:text-[var(--md-sys-color-on-surface-variant)] shadow-sm"
+              />
+              <Button
+                type="submit"
+                variant="default"
+                className="whitespace-nowrap gap-2 bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)] shadow-md hover:scale-105"
+              >
+                {submitted ? (
+                  <>
+                    <CheckCircle className="w-4 h-4" aria-hidden="true" />
+                    <span>Received!</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Consult Now</span>
+                    <Send className="w-4 h-4" aria-hidden="true" />
+                  </>
+                )}
+              </Button>
+            </div>
+
+            {errorMessage && (
+              <p
+                id="cta-email-error"
+                role="alert"
+                className="text-xs font-semibold text-rose-500 dark:text-rose-300 flex items-center justify-center gap-1.5 pt-1"
+              >
+                <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>{errorMessage}</span>
+              </p>
+            )}
           </form>
 
           {/* Value Badges */}

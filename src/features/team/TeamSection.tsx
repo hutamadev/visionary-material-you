@@ -2,48 +2,9 @@ import { Users, Globe, ExternalLink, Mail } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 import { Avatar } from '@/components/ui/Avatar'
-import type { TeamMember } from '@/types'
+import { teamMembersData } from '@/features/team/team.data'
 
 export function TeamSection() {
-  const teamMembers: TeamMember[] = [
-    {
-      id: 'm1',
-      name: 'Sarah Johnson',
-      role: 'CEO & Principal Architect',
-      bio: 'Former Google Material Design lead with 14+ years engineering distributed web architectures.',
-      avatar: 'https://api.dicebear.com/9.x/adventurer/svg?seed=Sarah&backgroundColor=transparent',
-      badgeColor: 'm3-tonal-rose',
-      social: { github: '#', linkedin: '#', twitter: '#' },
-    },
-    {
-      id: 'm2',
-      name: 'Michael Chen',
-      role: 'Chief Technology Officer',
-      bio: 'High-performance React & Three.js specialist passionate about WebGL shaders and real-time graphics.',
-      avatar: 'https://api.dicebear.com/9.x/adventurer/svg?seed=Michael&backgroundColor=transparent',
-      badgeColor: 'm3-tonal-sky',
-      social: { github: '#', linkedin: '#', twitter: '#' },
-    },
-    {
-      id: 'm3',
-      name: 'Emily Davis',
-      role: 'Head of Material Design',
-      bio: 'Design systems evangelist creating accessible, expressive token systems and intuitive micro-interactions.',
-      avatar: 'https://api.dicebear.com/9.x/adventurer/svg?seed=Emily&backgroundColor=transparent',
-      badgeColor: 'm3-tonal-mint',
-      social: { github: '#', linkedin: '#', twitter: '#' },
-    },
-    {
-      id: 'm4',
-      name: 'David Rodriguez',
-      role: 'Staff Platform Engineer',
-      bio: 'DevOps & cloud native architect orchestrating resilient Kubernetes pipelines and sub-second edge runtimes.',
-      avatar: 'https://api.dicebear.com/9.x/adventurer/svg?seed=David&backgroundColor=transparent',
-      badgeColor: 'm3-tonal-peach',
-      social: { github: '#', linkedin: '#', twitter: '#' },
-    },
-  ]
-
   return (
     <section id="team" aria-label="Core Team" className="scroll-mt-28 py-12">
       {/* Section Header */}
@@ -62,7 +23,7 @@ export function TeamSection() {
 
       {/* Team Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {teamMembers.map((member) => (
+        {teamMembersData.map((member) => (
           <Card
             key={member.id}
             as="article"
@@ -96,21 +57,21 @@ export function TeamSection() {
             {/* Social Links */}
             <div className="flex items-center justify-center gap-2.5 pt-6 mt-6 border-t border-[var(--md-sys-color-outline-variant)] w-full">
               <a
-                href={member.social.github}
+                href={member.social.github ?? '#'}
                 className="w-8 h-8 rounded-full bg-[var(--md-sys-color-surface-container-high)] flex items-center justify-center text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-primary)] hover:scale-110 transition-all"
                 aria-label={`${member.name}'s GitHub profile`}
               >
                 <Globe className="w-4 h-4" aria-hidden="true" />
               </a>
               <a
-                href={member.social.linkedin}
+                href={member.social.linkedin ?? '#'}
                 className="w-8 h-8 rounded-full bg-[var(--md-sys-color-surface-container-high)] flex items-center justify-center text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-primary)] hover:scale-110 transition-all"
                 aria-label={`${member.name}'s LinkedIn profile`}
               >
                 <ExternalLink className="w-4 h-4" aria-hidden="true" />
               </a>
               <a
-                href={member.social.twitter}
+                href={member.social.twitter ?? '#'}
                 className="w-8 h-8 rounded-full bg-[var(--md-sys-color-surface-container-high)] flex items-center justify-center text-[var(--md-sys-color-on-surface-variant)] hover:text-[var(--md-sys-color-primary)] hover:scale-110 transition-all"
                 aria-label={`Send direct message to ${member.name}`}
               >

@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Sparkles, Code2, Layers, Cpu, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
-import { HeroGlobe } from './HeroGlobe'
+import { HeroGlobe } from '@/features/hero/HeroGlobe'
 
 interface HeroSectionProps {
   isDark: boolean

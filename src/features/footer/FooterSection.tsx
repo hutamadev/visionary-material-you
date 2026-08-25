@@ -1,37 +1,8 @@
 import { MapPin, Mail, Phone, Sparkles, Globe, Share2, MessageCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
+import { footerLinksData } from '@/features/footer/footer.data'
 
 export function FooterSection() {
-  const footerLinks = {
-    solutions: [
-      { label: 'Full-Stack Web', href: '#services' },
-      { label: 'Material You 3 Design', href: '#services' },
-      { label: '3D WebGL Graphics', href: '#services' },
-      { label: 'AI Autonomous Agents', href: '#services' },
-      { label: 'Cloud Architecture', href: '#services' },
-    ],
-    company: [
-      { label: 'About Us', href: '#about' },
-      { label: 'Execution Workflow', href: '#workflow' },
-      { label: 'Case Studies', href: '#portfolio' },
-      { label: 'Core Team', href: '#team' },
-      { label: 'Careers (We’re Hiring!)', href: '#contact' },
-    ],
-    resources: [
-      { label: 'Material 3 Guidelines', href: 'https://m3.material.io' },
-      { label: 'React 19 Documentation', href: 'https://react.dev' },
-      { label: 'Three.js Documentation', href: 'https://threejs.org' },
-      { label: 'Engineering Blog', href: '#' },
-      { label: 'System Status', href: '#' },
-    ],
-    legal: [
-      { label: 'Privacy Policy', href: '#' },
-      { label: 'Terms of Service', href: '#' },
-      { label: 'Security & Compliance', href: '#' },
-      { label: 'Cookie Preferences', href: '#' },
-    ],
-  }
-
   return (
     <footer id="contact" aria-label="Footer and Contact Information" className="scroll-mt-28 pt-16 pb-12">
       <div className="rounded-[2.5rem] bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] p-8 sm:p-12 lg:p-16 shadow-lg space-y-16">
@@ -142,7 +113,7 @@ export function FooterSection() {
               Solutions
             </h3>
             <ul className="space-y-2 text-xs text-[var(--md-sys-color-on-surface-variant)]">
-              {footerLinks.solutions.map((item, i) => (
+              {footerLinksData.solutions.map((item, i) => (
                 <li key={i}>
                   <a href={item.href} className="hover:text-[var(--md-sys-color-primary)] transition-colors">
                     {item.label}
@@ -157,7 +128,7 @@ export function FooterSection() {
               Company
             </h3>
             <ul className="space-y-2 text-xs text-[var(--md-sys-color-on-surface-variant)]">
-              {footerLinks.company.map((item, i) => (
+              {footerLinksData.company.map((item, i) => (
                 <li key={i}>
                   <a href={item.href} className="hover:text-[var(--md-sys-color-primary)] transition-colors">
                     {item.label}
@@ -172,7 +143,7 @@ export function FooterSection() {
               Resources
             </h3>
             <ul className="space-y-2 text-xs text-[var(--md-sys-color-on-surface-variant)]">
-              {footerLinks.resources.map((item, i) => (
+              {footerLinksData.resources.map((item, i) => (
                 <li key={i}>
                   <a
                     href={item.href}
@@ -192,7 +163,7 @@ export function FooterSection() {
               Legal
             </h3>
             <ul className="space-y-2 text-xs text-[var(--md-sys-color-on-surface-variant)]">
-              {footerLinks.legal.map((item, i) => (
+              {footerLinksData.legal.map((item, i) => (
                 <li key={i}>
                   <a href={item.href} className="hover:text-[var(--md-sys-color-primary)] transition-colors">
                     {item.label}

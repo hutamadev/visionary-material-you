@@ -1,51 +1,77 @@
+import type { LucideIcon } from 'lucide-react'
+
 export interface ServiceItem {
-  id: string
-  title: string
-  description: string
-  icon: string
-  badge: string
-  tonalClass: string
+  readonly id: string
+  readonly title: string
+  readonly description: string
+  readonly icon: LucideIcon
+  readonly badge: string
+  readonly tonalClass: string
+  readonly tags: readonly string[]
 }
 
 export interface WorkflowStep {
-  step: string
-  title: string
-  description: string
-  tag: string
+  readonly number: string
+  readonly title: string
+  readonly description: string
+  readonly icon: LucideIcon
+  readonly tonal: string
 }
 
 export interface ProjectItem {
-  id: string
-  title: string
-  client: string
-  category: string
-  description: string
-  tags: string[]
-  metric: string
-  metricLabel: string
-  tonalClass: string
+  readonly id: string
+  readonly title: string
+  readonly client: string
+  readonly category: string
+  readonly description: string
+  readonly tags: readonly string[]
+  readonly metric: string
+  readonly metricLabel: string
+  readonly tonalClass: string
 }
 
 export interface TestimonialItem {
-  id: string
-  quote: string
-  name: string
-  role: string
-  company: string
-  avatar: string
-  rating: number
+  readonly id: string
+  readonly quote: string
+  readonly name: string
+  readonly role: string
+  readonly company: string
+  readonly avatar: string
+  readonly rating: number
+}
+
+export interface TeamMemberSocial {
+  readonly github?: string
+  readonly linkedin?: string
+  readonly twitter?: string
 }
 
 export interface TeamMember {
-  id: string
-  name: string
-  role: string
-  bio: string
-  avatar: string
-  badgeColor: string
-  social: {
-    github?: string
-    linkedin?: string
-    twitter?: string
-  }
+  readonly id: string
+  readonly name: string
+  readonly role: string
+  readonly bio: string
+  readonly avatar: string
+  readonly badgeColor: string
+  readonly social: TeamMemberSocial
+}
+
+export interface AboutValue {
+  readonly icon: LucideIcon
+  readonly title: string
+  readonly description: string
+  readonly tonalClass: string
+  readonly badge: string
+}
+
+export interface FooterLinkItem {
+  readonly label: string
+  readonly href: string
+}
+
+export interface FooterLinksStructure {
+  readonly solutions: readonly FooterLinkItem[]
+  readonly company: readonly FooterLinkItem[]
+  readonly resources: readonly FooterLinkItem[]
+  readonly legal: readonly FooterLinkItem[]
 }

@@ -1,42 +1,15 @@
-import { Sparkles, Users2, Rocket, Trophy, Compass, CheckCircle2 } from 'lucide-react'
+import { Sparkles, Compass, CheckCircle2 } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
+import { aboutValuesData, aboutMilestonesData } from '@/features/about/about.data'
 
 export function AboutSection() {
-  const values = [
-    {
-      icon: Users2,
-      title: 'Human-Centric Material Design',
-      description:
-        'Every pixel is tuned to Google Material You 3 standards—accessible, expressive, and tailored to human tactile interaction.',
-      tonalClass: 'm3-tonal-lavender',
-      badge: 'Ergonomics',
-    },
-    {
-      icon: Rocket,
-      title: 'High-Velocity Scalability',
-      description:
-        'Engineered on cutting-edge stacks (React, TypeScript, Bun) ensuring sub-second response times and rock-solid reliability.',
-      tonalClass: 'm3-tonal-mint',
-      badge: 'Performance',
-    },
-    {
-      icon: Trophy,
-      title: 'Measurable Business Impact',
-      description:
-        'We measure our success by your growth. From seed-stage startups to Global 500 enterprises, our solutions drive tangible ROI.',
-      tonalClass: 'm3-tonal-peach',
-      badge: 'Success',
-    },
-  ]
-
-  const milestones = [
-    'Strict Material 3 design tokens & responsive fluid typography',
-    'High-performance 3D WebGL visualizations with Three.js',
-    'Modular React 19 architecture with strict type safety',
-    'Optimized build pipeline powered by Bun runtime',
-  ]
+  const handleScrollToServices = (): void => {
+    const el = document.getElementById('services')
+    if (!el) return
+    el.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <section id="about" aria-label="About Visionary" className="scroll-mt-28 py-12">
@@ -77,7 +50,7 @@ export function AboutSection() {
             </p>
 
             <div className="space-y-3 pt-2">
-              {milestones.map((item, idx) => (
+              {aboutMilestonesData.map((item, idx) => (
                 <div key={idx} className="flex items-center gap-3 text-xs sm:text-sm text-[var(--md-sys-color-on-surface)] font-medium">
                   <CheckCircle2 className="w-4 h-4 text-[var(--md-sys-color-primary)] flex-shrink-0" aria-hidden="true" />
                   <span>{item}</span>
@@ -88,10 +61,7 @@ export function AboutSection() {
             <div className="pt-4">
               <Button
                 variant="default"
-                onClick={() => {
-                  const el = document.getElementById('services')
-                  if (el) el.scrollIntoView({ behavior: 'smooth' })
-                }}
+                onClick={handleScrollToServices}
                 className="gap-2"
               >
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
@@ -103,7 +73,7 @@ export function AboutSection() {
 
         {/* Right Column: 3 Pillar Cards */}
         <div className="lg:col-span-7 space-y-5">
-          {values.map((v, i) => {
+          {aboutValuesData.map((v, i) => {
             const Icon = v.icon
             return (
               <article

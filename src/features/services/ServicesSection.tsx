@@ -1,59 +1,9 @@
-import { Code2, Palette, Cloud, Bot, Cuboid, Smartphone, ArrowUpRight } from 'lucide-react'
+import { Palette, ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
+import { servicesData } from '@/features/services/services.data'
 
 export function ServicesSection() {
-  const services = [
-    {
-      icon: Code2,
-      title: 'Full-Stack Web Engineering',
-      description: 'Modern, reactive single-page & multi-page applications built with React 19, TypeScript, and high-throughput backends.',
-      badge: 'Engineering',
-      tonalClass: 'm3-tonal-lavender',
-      tags: ['React 19', 'TypeScript', 'Bun', 'REST / GraphQL'],
-    },
-    {
-      icon: Palette,
-      title: 'Material You 3 UI/UX Design',
-      description: 'Dynamic color-theming systems, fluid typography, and accessible design tokens crafted in accordance with Google Material 3.',
-      badge: 'Design System',
-      tonalClass: 'm3-tonal-peach',
-      tags: ['Material 3', 'Figma Tokens', 'WCAG AAA', 'Tailwind'],
-    },
-    {
-      icon: Cuboid,
-      title: '3D WebGL & Interactive Graphics',
-      description: 'Immersive browser-based 3D animations and interactive particle systems powered by Three.js and custom GLSL shaders.',
-      badge: 'Interactive 3D',
-      tonalClass: 'm3-tonal-sky',
-      tags: ['Three.js', 'WebGL', 'Shaders', 'Canvas 2D'],
-    },
-    {
-      icon: Bot,
-      title: 'AI Workflows & Autonomous Agents',
-      description: 'Integration of LLMs, agentic task runners, knowledge item retrieval, and automated intelligence pipelines.',
-      badge: 'AI & Data',
-      tonalClass: 'm3-tonal-mint',
-      tags: ['Agentic AI', 'Vector DB', 'Prompt Ops', 'Automation'],
-    },
-    {
-      icon: Cloud,
-      title: 'Cloud Infrastructure & DevOps',
-      description: 'Automated CI/CD pipelines, container orchestration, and serverless architectures with 99.99% availability guarantees.',
-      badge: 'Cloud Native',
-      tonalClass: 'm3-tonal-amber',
-      tags: ['Docker', 'AWS / GCP', 'Edge Network', 'Monitoring'],
-    },
-    {
-      icon: Smartphone,
-      title: 'Responsive & Cross-Platform Apps',
-      description: 'Seamless experiences optimized across mobile phones, tablets, foldables, and ultra-wide desktop monitors.',
-      badge: 'Multi-Device',
-      tonalClass: 'm3-tonal-rose',
-      tags: ['Progressive Web', 'Mobile-First', 'PWA', 'Touch Ergonomics'],
-    },
-  ]
-
   return (
     <section id="services" aria-label="Core Capabilities" className="scroll-mt-28 py-12">
       {/* Section Header */}
@@ -72,11 +22,11 @@ export function ServicesSection() {
 
       {/* Services Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {services.map((service, index) => {
+        {servicesData.map((service) => {
           const Icon = service.icon
           return (
             <Card
-              key={index}
+              key={service.id}
               as="article"
               aria-label={service.title}
               className="m3-card group relative flex flex-col justify-between p-8 cursor-pointer overflow-hidden"
