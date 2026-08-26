@@ -25,9 +25,9 @@ Dokumen ini berisi perencanaan tugas (*roadmap*), status pengerjaan, dan detail 
 Berdasarkan status terakhir di `MEMORY.md`, berikut adalah detail perencanaan untuk iterasi selanjutnya:
 
 ### 1. Version Control & Git Flow
-- [ ] Lakukan *code review* akhir untuk branch `feature/refactor`.
-- [ ] *Merge* branch `feature/refactor` ke branch `main`.
-- [ ] Hapus branch `feature/refactor` setelah proses *merge* berhasil untuk menjaga kebersihan repositori.
+- [x] Lakukan *code review* akhir untuk branch `feature/refactor`.
+- [x] *Merge* branch `feature/refactor` ke branch `main`.
+- [x] Hapus branch `feature/refactor` setelah proses *merge* berhasil untuk menjaga kebersihan repositori.
 
 ### 2. UI/UX Finalization (Frontend Only)
 - [ ] **Form CTA**: Pastikan animasi _loading_ dan _success state_ pada form CTA berjalan mulus sebagai simulasi frontend murni (Integrasi backend API tidak dilakukan).
@@ -42,7 +42,7 @@ Berdasarkan status terakhir di `MEMORY.md`, berikut adalah detail perencanaan un
   - SEO: 100
 
 ### 4. Dokumentasi & Readme
-- [ ] **Pembaruan README.md**: Ganti teks bawaan Vite dengan dokumentasi nyata yang mencakup: Deskripsi proyek (Visionary), *Tech Stack* yang digunakan, Arsitektur/Struktur Direktori, dan panduan instalasi serta cara menjalankannya (*How to run/dev/build*).
+- [x] **Pembaruan README.md**: Ganti teks bawaan Vite dengan dokumentasi nyata yang mencakup: Deskripsi proyek (Visionary), *Tech Stack* yang digunakan, Arsitektur/Struktur Direktori, dan panduan instalasi serta cara menjalankannya (*How to run/dev/build*).
 
 ### 5. Telemetry & Analytics (Opsional/Tahap Lanjut)
 - [ ] Integrasikan solusi analitik privasi sentris (seperti Vercel Analytics, Plausible, atau PostHog) untuk melacak *user journey* tanpa mengganggu *page load speed*.
