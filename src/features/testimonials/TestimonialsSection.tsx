@@ -32,7 +32,11 @@ export function TestimonialsSection() {
           >
             <div className="space-y-4">
               {/* Star Rating */}
-              <div className="flex items-center gap-1" aria-label={`${t.rating} out of 5 stars`}>
+              <div
+                role="img"
+                aria-label={`${t.rating} out of 5 stars`}
+                className="flex items-center gap-1"
+              >
                 {[...Array(t.rating)].map((_, i) => (
                   <Star
                     key={i}

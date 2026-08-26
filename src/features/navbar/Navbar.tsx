@@ -54,7 +54,7 @@ export function Navbar({ isDark, onToggleTheme }: NavbarProps) {
         {/* Brand Logo */}
         <button
           onClick={() => scrollTo('home')}
-          aria-label="Visionary - Back to top"
+          aria-label="Vibecoding - Back to top"
           className="flex items-center gap-2.5 group cursor-pointer text-left"
         >
           <div className="w-10 h-10 rounded-full bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)] flex items-center justify-center font-bold text-sm shadow-md group-hover:scale-105 transition-transform" aria-hidden="true">
