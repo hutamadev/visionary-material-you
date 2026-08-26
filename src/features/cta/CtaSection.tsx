@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ChangeEvent } from 'react'
+import { useState, type ChangeEvent, type SyntheticEvent } from 'react'
 import { Sparkles, CheckCircle, Send, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
@@ -16,7 +16,7 @@ export function CtaSection() {
     }
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
     const validationResult = ctaEmailSchema.safeParse({ email })
