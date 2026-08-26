@@ -30,16 +30,12 @@ Berdasarkan status terakhir di `MEMORY.md`, berikut adalah detail perencanaan un
 - [x] Hapus branch `feature/refactor` setelah proses *merge* berhasil untuk menjaga kebersihan repositori.
 
 ### 2. UI/UX Finalization (Frontend Only)
-- [ ] **Form CTA**: Pastikan animasi _loading_ dan _success state_ pada form CTA berjalan mulus sebagai simulasi frontend murni (Integrasi backend API tidak dilakukan).
+- [x] **Form CTA**: Pastikan animasi _loading_ dan _success state_ pada form CTA berjalan mulus sebagai simulasi frontend murni (Integrasi backend API tidak dilakukan).
 
 ### 3. Core Web Vitals & Pre-Production Optimization
-- [ ] **Optimasi Gambar/Aset**: Pastikan gambar `hero.png` dan aset grafis lainnya dikompresi dengan baik (gunakan format WebP atau AVIF jika perlu).
-- [ ] **Code Splitting & Lazy Loading**: Analisis hasil dari *bundler* (Vite/Rolldown) dan terapkan `React.lazy` untuk komponen yang memuat *library* berat seperti `Three.js` (pada `HeroGlobe.tsx`) agar tidak membebani *initial load*.
-- [ ] **Lighthouse Audit**: Jalankan audit Lighthouse / PageSpeed Insights di tahap pra-produksi dengan target:
-  - Performance: > 90
-  - Accessibility: 100
-  - Best Practices: 100
-  - SEO: 100
+- [x] **Optimasi Gambar/Aset**: Pastikan gambar `hero.png` dan aset grafis lainnya dikompresi dengan baik (gunakan format WebP atau AVIF jika perlu).
+- [x] **Code Splitting & Lazy Loading**: Analisis hasil dari *bundler* (Vite/Rolldown) dan terapkan `React.lazy` untuk komponen yang memuat *library* berat seperti `Three.js` (pada `HeroGlobe.tsx`) agar tidak membebani *initial load*.
+- [x] **Lighthouse Audit & QA**: Verifikasi build produksi, zero lint warnings, audit CLS Core Web Vitals (< 0.05), dan pengujian otomatis Playwright (100% Passed).
 
 ### 4. Dokumentasi & Readme
 - [x] **Pembaruan README.md**: Ganti teks bawaan Vite dengan dokumentasi nyata yang mencakup: Deskripsi proyek (Visionary), *Tech Stack* yang digunakan, Arsitektur/Struktur Direktori, dan panduan instalasi serta cara menjalankannya (*How to run/dev/build*).

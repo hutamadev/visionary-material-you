@@ -161,7 +161,7 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
 
     // Animation Loop
     let animationFrameId: number
-    const clock = new THREE.Clock()
+    const startTime = performance.now()
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate)
@@ -169,7 +169,7 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
       // Only perform heavy WebGL operations when in viewport
       if (!isVisible) return
 
-      const elapsedTime = clock.getElapsedTime()
+      const elapsedTime = (performance.now() - startTime) * 0.001
 
       targetX += (mouseX * 0.3 - targetX) * 0.05
       targetY += (mouseY * 0.3 - targetY) * 0.05

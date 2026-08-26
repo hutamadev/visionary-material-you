@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent, type SyntheticEvent } from 'react'
-import { Sparkles, CheckCircle, Send, AlertCircle } from 'lucide-react'
+import { Sparkles, CheckCircle, Send, AlertCircle, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { ctaEmailSchema } from '@/lib/validations/cta.schema'
@@ -7,6 +7,7 @@ import { ctaEmailSchema } from '@/lib/validations/cta.schema'
 export function CtaSection() {
   const [email, setEmail] = useState('')
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -18,6 +19,7 @@ export function CtaSection() {
 
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>): void => {
     e.preventDefault()
+    if (isSubmitting) return
 
     const validationResult = ctaEmailSchema.safeParse({ email })
 
@@ -28,12 +30,18 @@ export function CtaSection() {
     }
 
     setErrorMessage(null)
-    setSubmitted(true)
+    setIsSubmitting(true)
 
+    // Simulate smooth asynchronous frontend submission feedback
     setTimeout(() => {
-      setEmail('')
-      setSubmitted(false)
-    }, 4000)
+      setIsSubmitting(false)
+      setSubmitted(true)
+
+      setTimeout(() => {
+        setEmail('')
+        setSubmitted(false)
+      }, 4000)
+    }, 600)
   }
 
   return (
@@ -77,15 +85,22 @@ export function CtaSection() {
                 placeholder="Enter your work email..."
                 value={email}
                 onChange={handleInputChange}
+                disabled={isSubmitting || submitted}
                 required
-                className="bg-[var(--md-sys-color-surface)]/80 text-[var(--md-sys-color-on-surface)] border-transparent focus-visible:border-[var(--md-sys-color-primary)] placeholder:text-[var(--md-sys-color-on-surface-variant)] shadow-sm"
+                className="bg-[var(--md-sys-color-surface)]/80 text-[var(--md-sys-color-on-surface)] border-transparent focus-visible:border-[var(--md-sys-color-primary)] placeholder:text-[var(--md-sys-color-on-surface-variant)] shadow-sm disabled:opacity-60"
               />
               <Button
                 type="submit"
                 variant="default"
-                className="whitespace-nowrap gap-2 bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)] shadow-md hover:scale-105"
+                disabled={isSubmitting || submitted}
+                className="whitespace-nowrap gap-2 bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)] shadow-md hover:scale-105 disabled:opacity-75 disabled:hover:scale-100 min-w-[140px] justify-center"
               >
-                {submitted ? (
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                    <span>Processing...</span>
+                  </>
+                ) : submitted ? (
                   <>
                     <CheckCircle className="w-4 h-4" aria-hidden="true" />
                     <span>Received!</span>

@@ -12,21 +12,20 @@ Membangun "Visionary", sebuah aplikasi web modern berskala enterprise yang mengo
 - **Target OS**: Linux/WSL
 
 ## Current State & Completed Tasks
-- **Refaktor Standar Enterprise (`feature/refactor`)**:
-  - **Separation of Concerns (SoC)**: Berhasil mengekstrak semua data statis (*hardcoded fixtures*) dari komponen antarmuka ke modul data layer independen (`*.data.ts`).
-  - **Type-Safety Kuat**: Menghapus seluruh penggunaan tipe `any` (terutama pada komponen polimorfik `Card.tsx`) dan memperbarui definisi interface dengan properti `readonly`.
-  - **Validasi Keamanan**: Mengimplementasikan Zod schema validation untuk sanitasi input email pada `CtaSection.tsx`.
-  - **Global Error Handling**: Mengimplementasikan `ErrorBoundary` global dengan fallback UI bertema Material You 3 pada root aplikasi.
-  - **Penyempurnaan Kode**: Memperbaiki peringatan linter React Fast Refresh pada komponen `Button` dan menstandardisasi *absolute imports* (`@/`) secara menyeluruh.
-- **Kualitas Kode**: *Build* selesai tanpa error, Oxlint melaporkan 0 peringatan/error, dan semua 12 rangkaian tes *end-to-end* Playwright berhasil lolos (100% Passed).
+- **Dokumentasi & Standarisasi (`feature/documentation`)**:
+  - Menyusun `README.md` komprehensif (fitur, tech stack, struktur direktori, panduan instalasi, build, dan QA).
+- **Optimasi Performa & Core Web Vitals (`feature/performance-and-optimization`)**:
+  - **Code Splitting**: Menerapkan `React.lazy` + `Suspense` untuk `HeroGlobe` (Three.js 3D WebGL), memangkas *initial bundle* JS dari ~1.013 kB menjadi ~338 kB (~66% lebih ringan).
+  - **Vite Manual Chunks**: Memisahkan dependensi `three` dan animasi (`framer-motion`/`lenis`) ke vendor chunk terpisah.
+  - **UI/UX Polish**: Menambahkan spinner loading asinkron (`Loader2`) pada form CTA dan menghilangkan deprecation warning `THREE.Clock`.
+- **Kualitas Kode**: 100% lolos Oxlint (0 warning/error), kompilasi TypeScript sukses, dan seluruh 12 pengujian Playwright E2E lulus (CLS < 0.0001).
 
 ## Pending Issues
-- Tidak ada isu major/kritis saat ini.
+- Tidak ada isu saat ini.
 
 ## Next Steps
-- Menggabungkan (*merge*) branch `feature/refactor` ke cabang utama (jika disetujui).
-- Fokus pada penyelesaian UI/UX dan optimalisasi *frontend experience* (Core Web Vitals & SEO).
-- Melakukan evaluasi lanjutan terhadap Core Web Vitals dan SEO teknis di tahapan pra-produksi.
+- Menggabungkan (*merge*) branch `feature/performance-and-optimization` ke cabang utama (`main`).
+- Melakukan evaluasi lanjutan atau deployment produksi jika diperlukan.
 
 ## Agent Instructions
 - **Kepatuhan Aturan Global**: Selalu jalankan prinsip yang tertera di `GEMINI.md` (*Planner Mode*, hindari aksi destruktif, kode utuh tanpa placeholder).

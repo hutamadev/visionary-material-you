@@ -1,9 +1,24 @@
-import { useRef } from 'react'
+import { useRef, lazy, Suspense } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Sparkles, Code2, Layers, Cpu, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
-import { HeroGlobe } from '@/features/hero/HeroGlobe'
+
+// Lazy-load Three.js 3D Globe to optimize initial bundle and improve Core Web Vitals
+const HeroGlobe = lazy(() =>
+  import('@/features/hero/HeroGlobe').then((mod) => ({ default: mod.HeroGlobe }))
+)
+
+function HeroGlobeFallback() {
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center pointer-events-none"
+      aria-hidden="true"
+    >
+      <div className="w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-[var(--md-sys-color-primary-container)]/20 blur-2xl animate-pulse" />
+    </div>
+  )
+}
 
 interface HeroSectionProps {
   isDark: boolean
@@ -62,7 +77,9 @@ export function HeroSection({ isDark }: HeroSectionProps) {
         style={{ y: globeY, scale: globeScale, opacity: globeOpacity }}
         className="absolute inset-0 z-0 pointer-events-auto will-change-transform"
       >
-        <HeroGlobe isDark={isDark} />
+        <Suspense fallback={<HeroGlobeFallback />}>
+          <HeroGlobe isDark={isDark} />
+        </Suspense>
       </motion.div>
 
       {/* Hero Content with Smooth Spring-based Motion & Parallax */}
