@@ -1,5 +1,5 @@
-import * as React from "react"
-import { cn } from "@/lib/utils"
+import * as React from 'react'
+import { cn } from '@/lib/utils'
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string
@@ -7,13 +7,19 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   fallback?: string
 }
 
-export function Avatar({ className, src, alt = "Avatar", fallback, ...props }: AvatarProps) {
+export function Avatar({
+  className,
+  src,
+  alt = 'Avatar',
+  fallback,
+  ...props
+}: AvatarProps) {
   const [hasError, setHasError] = React.useState(false)
 
   return (
     <div
       className={cn(
-        "relative flex h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-[var(--md-sys-color-surface-container-high)] bg-[var(--md-sys-color-secondary-container)]",
+        'relative flex h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-(--md-sys-color-surface-container-high) bg-(--md-sys-color-secondary-container)',
         className
       )}
       {...props}
@@ -26,7 +32,7 @@ export function Avatar({ className, src, alt = "Avatar", fallback, ...props }: A
           className="aspect-square h-full w-full object-cover"
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center font-semibold text-xs text-[var(--md-sys-color-on-secondary-container)]">
+        <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-(--md-sys-color-on-secondary-container)">
           {fallback || alt.charAt(0).toUpperCase()}
         </div>
       )}

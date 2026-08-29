@@ -6,7 +6,9 @@ test.describe('Vibecoding Performance & Scroll Fluidity', () => {
     await page.waitForLoadState('networkidle')
   })
 
-  test('should maintain high FPS and low frame duration jitter during continuous scrolling', async ({ page }) => {
+  test('should maintain high FPS and low frame duration jitter during continuous scrolling', async ({
+    page,
+  }) => {
     // Inject high-precision FPS recorder
     await page.evaluate(() => {
       ;(window as any).__perfData = {
@@ -48,7 +50,8 @@ test.describe('Vibecoding Performance & Scroll Fluidity', () => {
       const data = (window as any).__perfData
       data.running = false
       const frames: number[] = data.frameTimes.slice(5) // Ignore initial warm-up frames
-      if (frames.length === 0) return { avgFps: 60, maxFrameTime: 16.6, droppedFrames: 0 }
+      if (frames.length === 0)
+        return { avgFps: 60, maxFrameTime: 16.6, droppedFrames: 0 }
 
       const totalTime = frames.reduce((a, b) => a + b, 0)
       const avgFrameTime = totalTime / frames.length
@@ -66,14 +69,18 @@ test.describe('Vibecoding Performance & Scroll Fluidity', () => {
       }
     })
 
-    console.log(`Scroll Performance Metrics: Avg FPS = ${metrics.avgFps.toFixed(1)}, Max Frame Time = ${metrics.maxFrameTime.toFixed(1)}ms, Total Frames = ${metrics.totalFrames}`)
+    console.log(
+      `Scroll Performance Metrics: Avg FPS = ${metrics.avgFps.toFixed(1)}, Max Frame Time = ${metrics.maxFrameTime.toFixed(1)}ms, Total Frames = ${metrics.totalFrames}`
+    )
 
     // Assert that average FPS remains fluid and consistent (>=20 FPS in headless CPU software rasterizer, 60fps on real hardware)
     expect(metrics.avgFps).toBeGreaterThan(20)
     expect(metrics.totalFrames).toBeGreaterThan(30)
   })
 
-  test('should satisfy Google Core Web Vitals (Zero Layout Shift - CLS < 0.05)', async ({ page }) => {
+  test('should satisfy Google Core Web Vitals (Zero Layout Shift - CLS < 0.05)', async ({
+    page,
+  }) => {
     // Measure Cumulative Layout Shift during scrolling
     const clsScore = await page.evaluate(async () => {
       let cumulativeScore = 0
@@ -101,25 +108,31 @@ test.describe('Vibecoding Performance & Scroll Fluidity', () => {
     expect(clsScore).toBeLessThan(0.05)
   })
 
-  test('should render Three.js canvas without WebGL context loss or unhandled errors', async ({ page }) => {
+  test('should render Three.js canvas without WebGL context loss or unhandled errors', async ({
+    page,
+  }) => {
     const errors: string[] = []
     page.on('pageerror', (err) => {
       // Filter out WebGL context creation error in headless CI environments without GPU
-      if (!err.message.includes('THREE.WebGLRenderer: Error creating WebGL context.')) {
+      if (
+        !err.message.includes(
+          'THREE.WebGLRenderer: Error creating WebGL context.'
+        )
+      ) {
         errors.push(err.message)
       }
     })
 
     // Wait for the hero section to be fully in view and lazy-loading to trigger
     await page.locator('#home').scrollIntoViewIfNeeded()
-    
-    // Canvas target: wait for existence instead of visibility, 
+
+    // Canvas target: wait for existence instead of visibility,
     // as it might be rendered with 0 opacity or outside viewport bounds in some CI setups
     const canvas = page.locator('canvas')
     try {
-        await canvas.first().waitFor({ state: 'attached', timeout: 5000 })
+      await canvas.first().waitFor({ state: 'attached', timeout: 5000 })
     } catch {
-        console.warn('Canvas not attached, likely headless GPU limitation.')
+      console.warn('Canvas not attached, likely headless GPU limitation.')
     }
 
     // Scroll if possible

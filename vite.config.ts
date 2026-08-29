@@ -18,7 +18,10 @@ export default defineConfig({
           if (id.includes('node_modules/three')) {
             return 'three-vendor'
           }
-          if (id.includes('node_modules/framer-motion') || id.includes('node_modules/lenis')) {
+          if (
+            id.includes('node_modules/framer-motion') ||
+            id.includes('node_modules/lenis')
+          ) {
             return 'motion-vendor'
           }
         },

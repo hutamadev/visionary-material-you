@@ -37,7 +37,9 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
 
       renderer.setSize(currentMount.clientWidth, currentMount.clientHeight)
       const isMobile = window.innerWidth < 768
-      renderer.setPixelRatio(isMobile ? 1.0 : Math.min(window.devicePixelRatio, 1.5))
+      renderer.setPixelRatio(
+        isMobile ? 1.0 : Math.min(window.devicePixelRatio, 1.5)
+      )
       currentMount.appendChild(renderer.domElement)
 
       // Palette based on Material You 3 Theme
@@ -61,7 +63,10 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
       }
 
       const globeGeometry = new THREE.BufferGeometry()
-      globeGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+      globeGeometry.setAttribute(
+        'position',
+        new THREE.BufferAttribute(positions, 3)
+      )
 
       const globeMaterial = new THREE.PointsMaterial({
         color: primaryColor,
@@ -84,7 +89,9 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
 
         for (let j = 0; j <= segments; j++) {
           const theta = (j / segments) * Math.PI * 2
-          points.push(new THREE.Vector3(Math.cos(theta) * r, 0, Math.sin(theta) * r))
+          points.push(
+            new THREE.Vector3(Math.cos(theta) * r, 0, Math.sin(theta) * r)
+          )
         }
 
         ringGeo.setFromPoints(points)
@@ -112,7 +119,10 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
         starPositions[i + 2] = (Math.random() - 0.5) * 15
       }
       const starsGeo = new THREE.BufferGeometry()
-      starsGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3))
+      starsGeo.setAttribute(
+        'position',
+        new THREE.BufferAttribute(starPositions, 3)
+      )
       const starsMat = new THREE.PointsMaterial({
         color: starColor,
         size: 0.035,
@@ -183,7 +193,8 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
         globe.rotation.x = Math.sin(elapsedTime * 0.1) * 0.1 + targetY
 
         ringsGroup.rotation.y = -elapsedTime * 0.12 - targetX * 0.5
-        ringsGroup.rotation.z = Math.cos(elapsedTime * 0.08) * 0.15 + targetY * 0.5
+        ringsGroup.rotation.z =
+          Math.cos(elapsedTime * 0.08) * 0.15 + targetY * 0.5
 
         stars.rotation.y = elapsedTime * 0.02
 
@@ -239,5 +250,5 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
     }
   }, [isDark])
 
-  return <div ref={mountRef} className="w-full h-full will-change-transform" />
+  return <div ref={mountRef} className="h-full w-full will-change-transform" />
 }

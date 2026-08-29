@@ -34,26 +34,28 @@ export default function App() {
       <StarfieldBackground isDark={isDark} />
 
       {/* Hardware-Accelerated Dynamic Ambient Background Parallax Elements */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 contain-strict">
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden contain-strict">
         <motion.div
           style={{
             y: bgOrb1Y,
-            background: 'radial-gradient(circle, var(--md-sys-color-primary-container) 0%, transparent 70%)',
+            background:
+              'radial-gradient(circle, var(--md-sys-color-primary-container) 0%, transparent 70%)',
           }}
-          className="absolute top-1/3 -left-32 w-lg h-lg rounded-full opacity-35 will-change-transform transform-gpu"
+          className="h-lg absolute top-1/3 -left-32 w-lg transform-gpu rounded-full opacity-35 will-change-transform"
         />
         <motion.div
           style={{
             y: bgOrb2Y,
-            background: 'radial-gradient(circle, var(--md-sys-color-tertiary-container) 0%, transparent 70%)',
+            background:
+              'radial-gradient(circle, var(--md-sys-color-tertiary-container) 0%, transparent 70%)',
           }}
-          className="absolute top-2/3 -right-32 w-120 h-120 rounded-full opacity-30 will-change-transform transform-gpu"
+          className="absolute top-2/3 -right-32 h-120 w-120 transform-gpu rounded-full opacity-30 will-change-transform"
         />
       </div>
 
       <HeroSection isDark={isDark} />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-12 space-y-20 sm:space-y-32 relative">
+      <div className="relative mx-auto max-w-6xl space-y-20 px-4 pb-12 sm:space-y-32 sm:px-6">
         <motion.div {...sectionMotionProps}>
           <AboutSection />
         </motion.div>

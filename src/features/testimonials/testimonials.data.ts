@@ -8,7 +8,8 @@ export const testimonialsData: readonly TestimonialItem[] = [
     name: 'Dr. Elena Rostova',
     role: 'VP of Product',
     company: 'Aura Health System',
-    avatar: 'https://api.dicebear.com/9.x/adventurer/svg?seed=Elena&backgroundColor=transparent',
+    avatar:
+      'https://api.dicebear.com/9.x/adventurer/svg?seed=Elena&backgroundColor=transparent',
     rating: 5,
   },
   {
@@ -18,7 +19,8 @@ export const testimonialsData: readonly TestimonialItem[] = [
     name: 'Marcus Vance',
     role: 'Chief Architect',
     company: 'Hyperion Freight AI',
-    avatar: 'https://api.dicebear.com/9.x/adventurer/svg?seed=Marcus&backgroundColor=transparent',
+    avatar:
+      'https://api.dicebear.com/9.x/adventurer/svg?seed=Marcus&backgroundColor=transparent',
     rating: 5,
   },
   {
@@ -28,7 +30,8 @@ export const testimonialsData: readonly TestimonialItem[] = [
     name: 'Sophia Lindqvist',
     role: 'Head of Engineering',
     company: 'Nexus FinTech Corp',
-    avatar: 'https://api.dicebear.com/9.x/adventurer/svg?seed=Sophia&backgroundColor=transparent',
+    avatar:
+      'https://api.dicebear.com/9.x/adventurer/svg?seed=Sophia&backgroundColor=transparent',
     rating: 5,
   },
 ] as const

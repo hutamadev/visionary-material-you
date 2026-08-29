@@ -6,12 +6,16 @@ test.describe('Vibecoding Material You 3 Web App', () => {
   })
 
   test('should load page with correct title and branding', async ({ page }) => {
-    await expect(page).toHaveTitle(/Visionary · Material You 3 Digital Engineering/)
+    await expect(page).toHaveTitle(
+      /Visionary · Material You 3 Digital Engineering/
+    )
     const brand = page.getByText('Vibecoding', { exact: false }).first()
     await expect(brand).toBeVisible()
   })
 
-  test('should default to system theme (not explicitly dark)', async ({ page }) => {
+  test('should default to system theme (not explicitly dark)', async ({
+    page,
+  }) => {
     const html = page.locator('html')
     // Saat 'system', class 'dark' tergantung OS di environment test (biasanya light)
     // Cukup pastikan app termuat tanpa error
@@ -21,14 +25,14 @@ test.describe('Vibecoding Material You 3 Web App', () => {
   test('should toggle theme correctly via dropdown', async ({ page }) => {
     const html = page.locator('html')
     const themeMenuBtn = page.getByRole('button', { name: 'Change theme' })
-    
+
     // Buka menu tema
     await themeMenuBtn.click()
-    
+
     // Pilih Dark
     await page.getByRole('button', { name: 'dark' }).click()
     await expect(html).toHaveClass(/dark/)
-    
+
     // Pilih Light
     await themeMenuBtn.click()
     await page.getByRole('button', { name: 'light' }).click()
@@ -38,7 +42,9 @@ test.describe('Vibecoding Material You 3 Web App', () => {
   test('should render all core sections', async ({ page }) => {
     // 1. Hero Section
     await expect(page.locator('#home')).toBeVisible()
-    await expect(page.getByRole('heading', { level: 1 })).toContainText(/Sculpting/i)
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(
+      /Sculpting/i
+    )
 
     // 2. About Section
     await expect(page.locator('#about')).toBeVisible()
@@ -69,7 +75,9 @@ test.describe('Vibecoding Material You 3 Web App', () => {
     await expect(page.getByText("Let's Start a Conversation")).toBeVisible()
   })
 
-  test('should support quick consultation form submission in CTA', async ({ page }) => {
+  test('should support quick consultation form submission in CTA', async ({
+    page,
+  }) => {
     const ctaSection = page.locator('#contact-cta')
     await ctaSection.scrollIntoViewIfNeeded()
 
@@ -80,6 +88,8 @@ test.describe('Vibecoding Material You 3 Web App', () => {
     const submitBtn = ctaSection.getByRole('button', { name: /Consult Now/i })
     await submitBtn.click()
 
-    await expect(ctaSection.getByText('Received!')).toBeVisible({ timeout: 5000 })
+    await expect(ctaSection.getByText('Received!')).toBeVisible({
+      timeout: 5000,
+    })
   })
 })

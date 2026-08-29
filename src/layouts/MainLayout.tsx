@@ -12,14 +12,12 @@ export function MainLayout({ children }: MainLayoutProps) {
   const { theme, isDark, setTheme } = useTheme()
 
   return (
-    <div className="min-h-screen bg-[var(--md-sys-color-background)] text-[var(--md-sys-color-on-background)] transition-colors duration-400">
+    <div className="min-h-screen bg-(--md-sys-color-background) text-(--md-sys-color-on-background) transition-colors duration-400">
       {/* Dynamic Floating Navbar */}
       <Navbar theme={theme} isDark={isDark} onToggleTheme={setTheme} />
 
       {/* Main Page Content */}
-      <main className="relative">
-        {children}
-      </main>
+      <main className="relative">{children}</main>
     </div>
   )
 }

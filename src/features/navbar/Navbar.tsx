@@ -1,6 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
-import { Sun, Moon, Monitor, Menu as MenuIcon, X, Sparkles, ArrowRight, ChevronDown } from 'lucide-react'
+import {
+  Sun,
+  Moon,
+  Monitor,
+  Menu as MenuIcon,
+  X,
+  Sparkles,
+  ArrowRight,
+  ChevronDown,
+} from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { scrollToTarget } from '@/hooks/useSmoothScroll'
 import { type Theme } from '@/hooks/useTheme'
 
 interface NavbarProps {
@@ -29,10 +39,7 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
 
   const scrollTo = (id: string) => {
     setMobileMenuOpen(false)
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    }
+    scrollToTarget(id)
   }
 
   const navLinks = [
@@ -46,47 +53,53 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4 transition-all duration-300">
-      <div ref={sentinelRef} className="absolute top-0 h-4 pointer-events-none" />
+    <header className="fixed top-0 right-0 left-0 z-50 px-4 py-4 transition-all duration-300 sm:px-8">
+      <div
+        ref={sentinelRef}
+        className="pointer-events-none absolute top-0 h-4"
+      />
       <nav
         aria-label="Main Navigation"
-        className={`max-w-6xl mx-auto rounded-full px-5 sm:px-7 py-3 flex items-center justify-between transition-all duration-300 m3-glass-nav ${
+        className={`m3-glass-nav mx-auto flex max-w-6xl items-center justify-between rounded-full px-5 py-3 transition-all duration-300 sm:px-7 ${
           isScrolled
             ? isDark
-              ? 'bg-[#1e1a24]/80 border border-[#49454f]/60 shadow-xl shadow-black/30 backdrop-blur-xl'
-              : 'bg-[#fdf8fd]/85 border border-[#cac4d0]/60 shadow-lg shadow-black/5 backdrop-blur-xl'
+              ? 'border border-[#49454f]/60 bg-[#1e1a24]/80 shadow-xl shadow-black/30 backdrop-blur-xl'
+              : 'border border-[#cac4d0]/60 bg-[#fdf8fd]/85 shadow-lg shadow-black/5 backdrop-blur-xl'
             : isDark
-            ? 'bg-[#1e1a24]/50 border border-[#49454f]/30 backdrop-blur-md'
-            : 'bg-[#fdf8fd]/60 border border-[#cac4d0]/30 backdrop-blur-md'
+              ? 'border border-[#49454f]/30 bg-[#1e1a24]/50 backdrop-blur-md'
+              : 'border border-[#cac4d0]/30 bg-[#fdf8fd]/60 backdrop-blur-md'
         }`}
       >
         {/* Brand Logo */}
         <button
           onClick={() => scrollTo('home')}
           aria-label="Vibecoding - Back to top"
-          className="flex items-center gap-2.5 group cursor-pointer text-left"
+          className="group flex cursor-pointer items-center gap-2.5 text-left"
         >
-          <div className="w-10 h-10 rounded-full bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)] flex items-center justify-center font-bold text-sm shadow-md group-hover:scale-105 transition-transform" aria-hidden="true">
-            <Sparkles className="w-5 h-5 text-[var(--md-sys-color-on-primary)]" />
+          <div
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-(--md-sys-color-primary) text-sm font-bold text-(--md-sys-color-on-primary) shadow-md transition-transform group-hover:scale-105"
+            aria-hidden="true"
+          >
+            <Sparkles className="h-5 w-5 text-(--md-sys-color-on-primary)" />
           </div>
           <div>
-            <div className="font-bold tracking-tight text-[var(--md-sys-color-on-surface)] text-base flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 text-base font-bold tracking-tight text-(--md-sys-color-on-surface)">
               Vibecoding
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--md-sys-color-primary)] animate-pulse" />
+              <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-(--md-sys-color-primary)" />
             </div>
-            <span className="hidden sm:block text-[10px] text-[var(--md-sys-color-on-surface-variant)] uppercase tracking-wider font-semibold">
+            <span className="hidden text-[10px] font-semibold tracking-wider text-(--md-sys-color-on-surface-variant) uppercase sm:block">
               Material You 3
             </span>
           </div>
         </button>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center gap-1 text-sm font-medium text-[var(--md-sys-color-on-surface)]">
+        <div className="hidden items-center gap-1 text-sm font-medium text-(--md-sys-color-on-surface) lg:flex">
           {navLinks.map((item) => (
             <button
               key={item.target}
               onClick={() => scrollTo(item.target)}
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold hover:bg-[var(--md-sys-color-surface-container-high)] hover:text-[var(--md-sys-color-primary)] transition-colors duration-200 cursor-pointer"
+              className="cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors duration-200 hover:bg-(--md-sys-color-surface-container-high) hover:text-(--md-sys-color-primary)"
             >
               {item.label}
             </button>
@@ -94,24 +107,33 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
         </div>
 
         {/* Actions (Theme Toggle & CTA) */}
-        <div className="flex items-center gap-2.5 relative">
+        <div className="relative flex items-center gap-2.5">
           <div className="relative">
             <button
               onClick={() => setShowThemeMenu(!showThemeMenu)}
-              className="p-2.5 rounded-full bg-[var(--md-sys-color-surface-container)] hover:bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-primary)] border border-[var(--md-sys-color-outline-variant)] transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-sm flex items-center gap-1.5"
+              className="flex cursor-pointer items-center gap-1.5 rounded-full border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) p-2.5 text-(--md-sys-color-primary) shadow-sm transition-all duration-200 hover:scale-105 hover:bg-(--md-sys-color-surface-container-high) active:scale-95"
               aria-label="Change theme"
             >
-              {theme === 'dark' ? <Moon className="w-4 h-4" /> : theme === 'light' ? <Sun className="w-4 h-4" /> : <Monitor className="w-4 h-4" />}
-              <ChevronDown className="w-3 h-3 opacity-60" />
+              {theme === 'dark' ? (
+                <Moon className="h-4 w-4" />
+              ) : theme === 'light' ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Monitor className="h-4 w-4" />
+              )}
+              <ChevronDown className="h-3 w-3 opacity-60" />
             </button>
 
             {showThemeMenu && (
-              <div className="absolute top-full right-0 mt-3 py-1 w-32 bg-[var(--md-sys-color-surface-container)] rounded-lg shadow-lg border border-[var(--md-sys-color-outline-variant)] z-50 overflow-hidden">
+              <div className="absolute top-full right-0 z-50 mt-3 w-32 overflow-hidden rounded-lg border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) py-1 shadow-lg">
                 {(['light', 'dark', 'system'] as Theme[]).map((t) => (
                   <button
                     key={t}
-                    onClick={() => { onToggleTheme(t); setShowThemeMenu(false) }}
-                    className={`w-full text-left px-4 py-2 text-xs font-medium capitalize transition-colors hover:bg-[var(--md-sys-color-surface-container-high)] ${theme === t ? 'text-[var(--md-sys-color-primary)]' : 'text-[var(--md-sys-color-on-surface)]'}`}
+                    onClick={() => {
+                      onToggleTheme(t)
+                      setShowThemeMenu(false)
+                    }}
+                    className={`w-full px-4 py-2 text-left text-xs font-medium capitalize transition-colors hover:bg-(--md-sys-color-surface-container-high) ${theme === t ? 'text-(--md-sys-color-primary)' : 'text-(--md-sys-color-on-surface)'}`}
                   >
                     {t}
                   </button>
@@ -124,19 +146,23 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
             size="sm"
             variant="default"
             onClick={() => scrollTo('contact')}
-            className="hidden sm:inline-flex gap-1.5 shadow-sm"
+            className="hidden gap-1.5 shadow-sm sm:inline-flex"
           >
             <span>Let's Talk</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="h-3.5 w-3.5" />
           </Button>
 
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-full text-[var(--md-sys-color-on-surface)] hover:bg-[var(--md-sys-color-surface-container-high)] cursor-pointer"
+            className="cursor-pointer rounded-full p-2 text-(--md-sys-color-on-surface) hover:bg-(--md-sys-color-surface-container-high) lg:hidden"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <MenuIcon className="h-5 w-5" />
+            )}
           </button>
         </div>
       </nav>
@@ -145,10 +171,10 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
       {mobileMenuOpen && (
         <nav
           aria-label="Mobile Navigation"
-          className={`lg:hidden max-w-6xl mx-auto mt-2 p-6 rounded-3xl m3-glass-nav border shadow-2xl transition-all ${
+          className={`m3-glass-nav mx-auto mt-2 max-w-6xl rounded-3xl border p-6 shadow-2xl transition-all lg:hidden ${
             isDark
-              ? 'bg-[#1e1a24]/95 border-[#49454f]/80'
-              : 'bg-[#fdf8fd]/95 border-[#cac4d0]/80'
+              ? 'border-[#49454f]/80 bg-[#1e1a24]/95'
+              : 'border-[#cac4d0]/80 bg-[#fdf8fd]/95'
           }`}
         >
           <div className="flex flex-col gap-2">
@@ -156,12 +182,12 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
               <button
                 key={item.target}
                 onClick={() => scrollTo(item.target)}
-                className="text-left px-4 py-2.5 rounded-2xl text-sm font-semibold hover:bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-on-surface)]"
+                className="rounded-2xl px-4 py-2.5 text-left text-sm font-semibold text-(--md-sys-color-on-surface) hover:bg-(--md-sys-color-surface-container-high)"
               >
                 {item.label}
               </button>
             ))}
-            <div className="pt-3 border-t border-[var(--md-sys-color-outline-variant)]">
+            <div className="border-t border-(--md-sys-color-outline-variant) pt-3">
               <Button
                 variant="default"
                 className="w-full justify-center"

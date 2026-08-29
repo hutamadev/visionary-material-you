@@ -2,57 +2,74 @@ import { Sparkles, Compass, CheckCircle2 } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { aboutValuesData, aboutMilestonesData } from '@/features/about/about.data'
+import { scrollToTarget } from '@/hooks/useSmoothScroll'
+import {
+  aboutValuesData,
+  aboutMilestonesData,
+} from '@/features/about/about.data'
 
 export function AboutSection() {
   const handleScrollToServices = (): void => {
-    const el = document.getElementById('services')
-    if (!el) return
-    el.scrollIntoView({ behavior: 'smooth' })
+    scrollToTarget('services')
   }
 
   return (
-    <section id="about" aria-label="About Visionary" className="scroll-mt-28 py-12">
+    <section
+      id="about"
+      aria-label="About Visionary"
+      className="scroll-mt-28 py-12"
+    >
       {/* Section Header */}
-      <div className="flex flex-col items-center text-center space-y-3 mb-16">
+      <div className="mb-16 flex flex-col items-center space-y-3 text-center">
         <Badge variant="primary">
-          <Compass className="w-3.5 h-3.5" aria-hidden="true" />
+          <Compass className="h-3.5 w-3.5" aria-hidden="true" />
           <span>About Visionary</span>
         </Badge>
-        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[var(--md-sys-color-on-surface)]">
+        <h2 className="text-3xl font-extrabold tracking-tight text-(--md-sys-color-on-surface) sm:text-5xl">
           Pioneering the Next Wave of Digital Craft
         </h2>
-        <p className="text-base sm:text-lg text-[var(--md-sys-color-on-surface-variant)] max-w-2xl">
-          We combine Google's adaptive design philosophy with modern software engineering to create experiences that empower businesses worldwide.
+        <p className="max-w-2xl text-base text-(--md-sys-color-on-surface-variant) sm:text-lg">
+          We combine Google's adaptive design philosophy with modern software
+          engineering to create experiences that empower businesses worldwide.
         </p>
       </div>
 
       {/* Main Grid: Story + Pillars */}
-      <div className="grid lg:grid-cols-12 gap-10 items-center">
+      <div className="grid items-center gap-10 lg:grid-cols-12">
         {/* Left Column: Narrative */}
-        <div className="lg:col-span-5 space-y-6">
-          <Card className="space-y-6 p-8 border-[var(--md-sys-color-outline-variant)]">
+        <div className="space-y-6 lg:col-span-5">
+          <Card className="space-y-6 border-(--md-sys-color-outline-variant) p-8">
             <div className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[var(--md-sys-color-primary)]">
+              <span className="text-xs font-bold tracking-wider text-(--md-sys-color-primary) uppercase">
                 Our Genesis
               </span>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[var(--md-sys-color-on-surface)]">
+              <h3 className="text-2xl font-bold text-(--md-sys-color-on-surface) sm:text-3xl">
                 Built for builders, designed for humans.
               </h3>
             </div>
-            
-            <p className="text-sm sm:text-base text-[var(--md-sys-color-on-surface-variant)] leading-relaxed">
-              Founded in 2012, Visionary Tech Solutions emerged with a singular mandate: to bridge the gap between high-level architectural complexity and elegant, human-first visual design.
+
+            <p className="text-sm leading-relaxed text-(--md-sys-color-on-surface-variant) sm:text-base">
+              Founded in 2012, Visionary Tech Solutions emerged with a singular
+              mandate: to bridge the gap between high-level architectural
+              complexity and elegant, human-first visual design.
             </p>
 
-            <p className="text-sm sm:text-base text-[var(--md-sys-color-on-surface-variant)] leading-relaxed">
-              We leverage Material You 3 to bring harmonic tonal palettes, responsive layouts, and seamless micro-animations into production software at scale.
+            <p className="text-sm leading-relaxed text-(--md-sys-color-on-surface-variant) sm:text-base">
+              We leverage Material You 3 to bring harmonic tonal palettes,
+              responsive layouts, and seamless micro-animations into production
+              software at scale.
             </p>
 
             <div className="space-y-3 pt-2">
               {aboutMilestonesData.map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3 text-xs sm:text-sm text-[var(--md-sys-color-on-surface)] font-medium">
-                  <CheckCircle2 className="w-4 h-4 text-[var(--md-sys-color-primary)] flex-shrink-0" aria-hidden="true" />
+                <div
+                  key={idx}
+                  className="flex items-center gap-3 text-xs font-medium text-(--md-sys-color-on-surface) sm:text-sm"
+                >
+                  <CheckCircle2
+                    className="h-4 w-4 shrink-0 text-(--md-sys-color-primary)"
+                    aria-hidden="true"
+                  />
                   <span>{item}</span>
                 </div>
               ))}
@@ -64,7 +81,7 @@ export function AboutSection() {
                 onClick={handleScrollToServices}
                 className="gap-2"
               >
-                <Sparkles className="w-4 h-4" aria-hidden="true" />
+                <Sparkles className="h-4 w-4" aria-hidden="true" />
                 <span>Explore Capabilities</span>
               </Button>
             </div>
@@ -72,29 +89,32 @@ export function AboutSection() {
         </div>
 
         {/* Right Column: 3 Pillar Cards */}
-        <div className="lg:col-span-7 space-y-5">
+        <div className="space-y-5 lg:col-span-7">
           {aboutValuesData.map((v, i) => {
             const Icon = v.icon
             return (
               <article
                 key={i}
                 aria-label={v.title}
-                className={`${v.tonalClass} rounded-3xl p-6 sm:p-8 shadow-sm transition-all duration-300 hover:scale-[1.01] hover:shadow-md`}
+                className={`${v.tonalClass} rounded-3xl p-6 shadow-sm transition-all duration-300 hover:scale-[1.01] hover:shadow-md sm:p-8`}
               >
                 <div className="flex items-start gap-5">
-                  <div className="w-12 h-12 rounded-2xl bg-black/10 dark:bg-white/15 flex items-center justify-center flex-shrink-0 shadow-inner" aria-hidden="true">
-                    <Icon className="w-6 h-6" />
+                  <div
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-black/10 shadow-inner dark:bg-white/15"
+                    aria-hidden="true"
+                  >
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <div className="space-y-1.5 flex-1">
+                  <div className="flex-1 space-y-1.5">
                     <div className="flex items-center justify-between gap-2">
-                      <h3 className="text-lg sm:text-xl font-bold tracking-tight">
+                      <h3 className="text-lg font-bold tracking-tight sm:text-xl">
                         {v.title}
                       </h3>
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-black/10 dark:bg-white/15">
+                      <span className="rounded-full bg-black/10 px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase dark:bg-white/15">
                         {v.badge}
                       </span>
                     </div>
-                    <p className="text-xs sm:text-sm opacity-90 leading-relaxed font-normal">
+                    <p className="text-xs leading-relaxed font-normal opacity-90 sm:text-sm">
                       {v.description}
                     </p>
                   </div>

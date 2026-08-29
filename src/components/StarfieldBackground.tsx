@@ -41,13 +41,25 @@ export function StarfieldBackground({ isDark }: StarfieldBackgroundProps) {
     }
 
     // Material You 3 palette-matched star colors
-    const darkStarColors  = ['#ccc2dc', '#d0bcff', '#efb8c8', '#938f99', '#e6e1e5']
+    const darkStarColors = [
+      '#ccc2dc',
+      '#d0bcff',
+      '#efb8c8',
+      '#938f99',
+      '#e6e1e5',
+    ]
     // Light theme: stronger mid-tone colors for visibility against #fdf8fd
-    const lightStarColors = ['#7b5ea7', '#9678c2', '#b06a80', '#6e6490', '#8a72b5']
+    const lightStarColors = [
+      '#7b5ea7',
+      '#9678c2',
+      '#b06a80',
+      '#6e6490',
+      '#8a72b5',
+    ]
 
     const resize = () => {
       // Fixed/absolute canvas only needs viewport dimensions
-      canvas.width  = window.innerWidth
+      canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }
 
@@ -89,7 +101,9 @@ export function StarfieldBackground({ isDark }: StarfieldBackgroundProps) {
       for (const star of stars) {
         // Twinkle via sine wave
         const twinkle =
-          star.opacity + Math.sin(frame * star.twinkleSpeed + star.twinklePhase) * (star.opacity * 0.45)
+          star.opacity +
+          Math.sin(frame * star.twinkleSpeed + star.twinklePhase) *
+            (star.opacity * 0.45)
 
         // Slow ambient drift
         star.x += Math.cos(star.angle) * star.speed
@@ -126,9 +140,8 @@ export function StarfieldBackground({ isDark }: StarfieldBackgroundProps) {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="fixed inset-0 w-full h-full pointer-events-none z-50"
+      className="pointer-events-none fixed inset-0 z-50 h-full w-full"
       style={{ opacity: isDark ? 0.5 : 0.55 }}
     />
   )
 }
-
