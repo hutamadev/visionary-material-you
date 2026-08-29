@@ -204,8 +204,8 @@ body {
 
 /* Glassmorphic Material Topbar */
 .m3-glass-nav {
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
 }
 
 /* Micro-animations */

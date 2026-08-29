@@ -52,8 +52,12 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
         aria-label="Main Navigation"
         className={`max-w-6xl mx-auto rounded-full px-5 sm:px-7 py-3 flex items-center justify-between transition-all duration-300 m3-glass-nav ${
           isScrolled
-            ? 'bg-[var(--md-sys-color-surface-container)]/80 border border-[var(--md-sys-color-outline-variant)] shadow-md'
-            : 'bg-transparent border border-transparent'
+            ? isDark
+              ? 'bg-[#1e1a24]/80 border border-[#49454f]/60 shadow-xl shadow-black/30 backdrop-blur-xl'
+              : 'bg-[#fdf8fd]/85 border border-[#cac4d0]/60 shadow-lg shadow-black/5 backdrop-blur-xl'
+            : isDark
+            ? 'bg-[#1e1a24]/50 border border-[#49454f]/30 backdrop-blur-md'
+            : 'bg-[#fdf8fd]/60 border border-[#cac4d0]/30 backdrop-blur-md'
         }`}
       >
         {/* Brand Logo */}

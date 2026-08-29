@@ -10,27 +10,35 @@ export function useTheme() {
     return 'system'
   })
 
+  // Tracks the ACTUAL resolved theme (accounts for OS preference when in 'system' mode)
+  const [resolvedDark, setResolvedDark] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    return false
+  })
+
   useEffect(() => {
     const root = document.documentElement
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
     const applyTheme = () => {
+      let dark: boolean
       if (theme === 'system') {
-        if (mediaQuery.matches) {
-          root.classList.add('dark')
-        } else {
-          root.classList.remove('dark')
-        }
+        dark = mediaQuery.matches
       } else {
-        root.classList.toggle('dark', theme === 'dark')
+        dark = theme === 'dark'
       }
+      root.classList.toggle('dark', dark)
+      setResolvedDark(dark)
     }
 
     applyTheme()
 
-    const listener = (e: MediaQueryListEvent) => {
+    const listener = () => {
       if (theme === 'system') {
-        root.classList.toggle('dark', e.matches)
+        root.classList.toggle('dark', mediaQuery.matches)
+        setResolvedDark(mediaQuery.matches)
       }
     }
 
@@ -46,7 +54,7 @@ export function useTheme() {
 
   return {
     theme,
-    isDark: theme === 'dark',
+    isDark: theme === 'dark' ? true : resolvedDark,
     toggleTheme,
     setTheme,
   }
