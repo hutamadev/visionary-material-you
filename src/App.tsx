@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTheme } from '@/hooks/useTheme'
 import { MainLayout } from '@/layouts/MainLayout'
+import { StarfieldBackground } from '@/components/StarfieldBackground'
 import { HeroSection } from '@/features/hero/HeroSection'
 import { AboutSection } from '@/features/about/AboutSection'
 import { ServicesSection } from '@/features/services/ServicesSection'
@@ -29,6 +30,9 @@ export default function App() {
 
   return (
     <MainLayout>
+      {/* Global Starfield Overlay — fixed on top of everything, pointer-events: none */}
+      <StarfieldBackground isDark={isDark} />
+
       {/* Hardware-Accelerated Dynamic Ambient Background Parallax Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 contain-strict">
         <motion.div
@@ -36,14 +40,14 @@ export default function App() {
             y: bgOrb1Y,
             background: 'radial-gradient(circle, var(--md-sys-color-primary-container) 0%, transparent 70%)',
           }}
-          className="absolute top-1/3 -left-32 w-[32rem] h-[32rem] rounded-full opacity-35 will-change-transform transform-gpu"
+          className="absolute top-1/3 -left-32 w-lg h-lg rounded-full opacity-35 will-change-transform transform-gpu"
         />
         <motion.div
           style={{
             y: bgOrb2Y,
             background: 'radial-gradient(circle, var(--md-sys-color-tertiary-container) 0%, transparent 70%)',
           }}
-          className="absolute top-2/3 -right-32 w-[30rem] h-[30rem] rounded-full opacity-30 will-change-transform transform-gpu"
+          className="absolute top-2/3 -right-32 w-120 h-120 rounded-full opacity-30 will-change-transform transform-gpu"
         />
       </div>
 

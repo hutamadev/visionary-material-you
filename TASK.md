@@ -21,24 +21,58 @@ Dokumen ini berisi perencanaan tugas (*roadmap*), status pengerjaan, dan detail 
 
 ---
 
-## 🚀 Phase 3: Next Steps (In Progress)
-Berdasarkan status terakhir di `MEMORY.md`, berikut adalah detail perencanaan untuk iterasi selanjutnya:
+## ✅ Phase 3: Production-Ready MVP (Selesai)
+*Fokus: Version Control, UI/UX Finalization, Core Web Vitals, Dokumentasi.*
 
 ### 1. Version Control & Git Flow
-- [x] Lakukan *code review* akhir untuk branch `feature/refactor`.
+- [x] *Code review* akhir untuk branch `feature/refactor`.
 - [x] *Merge* branch `feature/refactor` ke branch `main`.
-- [x] Hapus branch `feature/refactor` setelah proses *merge* berhasil untuk menjaga kebersihan repositori.
+- [x] Hapus branch `feature/refactor` setelah proses *merge* berhasil.
 
 ### 2. UI/UX Finalization (Frontend Only)
-- [x] **Form CTA**: Pastikan animasi _loading_ dan _success state_ pada form CTA berjalan mulus sebagai simulasi frontend murni (Integrasi backend API tidak dilakukan).
+- [x] **Form CTA**: Animasi _loading_ dan _success state_ pada form CTA berjalan mulus sebagai simulasi frontend murni.
 
 ### 3. Core Web Vitals & Pre-Production Optimization
-- [x] **Optimasi Gambar/Aset**: Pastikan gambar `hero.png` dan aset grafis lainnya dikompresi dengan baik (gunakan format WebP atau AVIF jika perlu).
-- [x] **Code Splitting & Lazy Loading**: Analisis hasil dari *bundler* (Vite/Rolldown) dan terapkan `React.lazy` untuk komponen yang memuat *library* berat seperti `Three.js` (pada `HeroGlobe.tsx`) agar tidak membebani *initial load*.
-- [x] **Lighthouse Audit & QA**: Verifikasi build produksi, zero lint warnings, audit CLS Core Web Vitals (< 0.05), dan pengujian otomatis Playwright (100% Passed).
+- [x] **Optimasi Gambar/Aset**: Kompresi `hero.png` dan aset grafis (WebP/AVIF).
+- [x] **Code Splitting & Lazy Loading**: `React.lazy` untuk `HeroGlobe.tsx` (Three.js) agar tidak membebani *initial load*.
+- [x] **Lighthouse Audit & QA**: Build produksi terverifikasi, zero lint warnings, CLS < 0.05, Playwright 100% Passed.
 
 ### 4. Dokumentasi & Readme
-- [x] **Pembaruan README.md**: Ganti teks bawaan Vite dengan dokumentasi nyata yang mencakup: Deskripsi proyek (Visionary), *Tech Stack* yang digunakan, Arsitektur/Struktur Direktori, dan panduan instalasi serta cara menjalankannya (*How to run/dev/build*).
+- [x] **Pembaruan README.md**: Deskripsi proyek, *Tech Stack*, Arsitektur Direktori, panduan instalasi & cara menjalankan.
 
-### 5. Telemetry & Analytics (Opsional/Tahap Lanjut)
-- [ ] Integrasikan solusi analitik privasi sentris (seperti Vercel Analytics, Plausible, atau PostHog) untuk melacak *user journey* tanpa mengganggu *page load speed*.
+---
+
+## 🚀 Phase 4: Production-Ready Enhancements (In Progress)
+*Fokus: Telemetri, PWA, Dynamic Theme, dan Advanced UX Polish.*
+
+### 1. Dynamic Design System ✅
+- [x] **Theme Switcher**: Toggle manual (Dark/Light/System) mengubah CSS variables `var(--md-sys-color-*)` secara dinamis.
+- [x] **Color Palette Sync**: Sinkronisasi warna aksen berdasarkan `prefers-color-scheme`.
+
+### 2. Advanced UX Polish ✅
+
+#### 2a. Core Motion & Parallax
+- [x] **Globe Three.js** — `HeroGlobe.tsx`: Animation loop (`requestAnimationFrame`) + cleanup (`cancelAnimationFrame`, `dispose()` geometry/material/renderer).
+- [x] **Smooth Scroll (Lenis)** — `useSmoothScroll.ts`: Hook dipanggil di `MainLayout`, RAF loop + `lenis.destroy()` on cleanup. Sync `document.documentElement.scrollTop` via `lenis.on('scroll', ...)` agar framer-motion `useScroll` membaca nilai smooth.
+- [x] **Parallax Background** — `HeroSection.tsx` & `App.tsx`: `useScroll` + `useTransform` dari framer-motion untuk parallax multi-layer (globe, content, ambient glows).
+
+#### 2b. Card Micro-Interactions (Framer Motion Spring)
+- [x] **Portfolio cards** — `PortfolioSection.tsx`: `<motion.div>` dengan `whileHover={{ scale: 1.03, y: -6 }}` spring + staggered `whileInView` entrance. Arrow icon `rotate: 45` spring on hover.
+- [x] **Services cards** — `ServicesSection.tsx`: `<motion.div>` spring hover + `whileInView` staggered entrance. Icon container `rotate: -6` spring. Arrow icon motion opacity/translate.
+- [x] **Team cards** — `TeamSection.tsx`: `<motion.div>` spring hover (`scale: 1.04, y: -8`). Avatar bouncy spring + `rotate: 4`. Social links `<motion.a>` dengan `whileHover` scale + color spring.
+
+### 3. Telemetry & User Insights
+- [ ] **Integrasi Analitik**: Implementasi [Vercel Analytics](https://vercel.com/analytics) atau [Plausible](https://plausible.io/) untuk melacak *user journey* tanpa mengorbankan privasi.
+- [ ] **Custom Event Tracking**: Pelacakan event khusus:
+    - CTA Form Submission (event `cta_form_submit`).
+    - Durasi interaksi dengan `HeroGlobe` (Three.js canvas).
+
+### 4. Progressive Web App (PWA)
+- [ ] **Offline Capabilities**: Integrasi `vite-plugin-pwa` untuk *service worker* dasar.
+- [ ] **Manifest & Assets**: Konfigurasi `manifest.json` (ikon, *theme-color*, nama aplikasi) agar aplikasi dapat diinstal di *mobile* atau *desktop*.
+
+---
+
+## 📈 Phase 5: Monitoring & Maintenance (Backlog)
+- [ ] **Lighthouse CI**: Automasi pengecekan performa setiap *push* ke `main` menggunakan GitHub Actions.
+- [ ] **Dependency Audit**: Rutin cek versi `three`, `react`, dan `vite` untuk menghindari *security vulnerabilities*.
