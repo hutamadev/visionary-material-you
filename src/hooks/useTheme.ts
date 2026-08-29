@@ -1,30 +1,47 @@
 import { useState, useEffect } from 'react'
 
-export type Theme = 'dark' | 'light'
+export type Theme = 'dark' | 'light' | 'system'
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme') as Theme | null
-      if (saved) return saved
-      // Default to Dark Mode as per requirements
-      return 'dark'
+      return (localStorage.getItem('theme') as Theme) || 'system'
     }
-    return 'dark'
+    return 'system'
   })
 
   useEffect(() => {
     const root = document.documentElement
-    if (theme === 'dark') {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const applyTheme = () => {
+      if (theme === 'system') {
+        if (mediaQuery.matches) {
+          root.classList.add('dark')
+        } else {
+          root.classList.remove('dark')
+        }
+      } else {
+        root.classList.toggle('dark', theme === 'dark')
+      }
     }
+
+    applyTheme()
+
+    const listener = (e: MediaQueryListEvent) => {
+      if (theme === 'system') {
+        root.classList.toggle('dark', e.matches)
+      }
+    }
+
+    mediaQuery.addEventListener('change', listener)
     localStorage.setItem('theme', theme)
+
+    return () => mediaQuery.removeEventListener('change', listener)
   }, [theme])
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
+  const toggleTheme = (newTheme: Theme) => {
+    setTheme(newTheme)
   }
 
   return {

@@ -20,7 +20,7 @@ const sectionMotionProps = {
 }
 
 export default function App() {
-  const { isDark, toggleTheme } = useTheme()
+  const { isDark } = useTheme()
   const { scrollYProgress } = useScroll()
 
   // Deep spatial ambient glow parallax shifts
@@ -28,7 +28,7 @@ export default function App() {
   const bgOrb2Y = useTransform(scrollYProgress, [0, 1], ['0px', '-300px'])
 
   return (
-    <MainLayout isDark={isDark} onToggleTheme={toggleTheme}>
+    <MainLayout>
       {/* Hardware-Accelerated Dynamic Ambient Background Parallax Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 contain-strict">
         <motion.div

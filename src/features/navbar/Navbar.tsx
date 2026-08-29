@@ -1,22 +1,30 @@
-import { useState, useEffect } from 'react'
-import { Sun, Moon, Menu as MenuIcon, X, Sparkles, ArrowRight } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Sun, Moon, Monitor, Menu as MenuIcon, X, Sparkles, ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { type Theme } from '@/hooks/useTheme'
 
 interface NavbarProps {
+  theme: Theme
+  onToggleTheme: (theme: Theme) => void
   isDark: boolean
-  onToggleTheme: () => void
 }
 
-export function Navbar({ isDark, onToggleTheme }: NavbarProps) {
+export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [showThemeMenu, setShowThemeMenu] = useState(false)
+  const sentinelRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsScrolled(!entry.isIntersecting)
+      },
+      { threshold: [1] }
+    )
+
+    if (sentinelRef.current) observer.observe(sentinelRef.current)
+    return () => observer.disconnect()
   }, [])
 
   const scrollTo = (id: string) => {
@@ -39,16 +47,13 @@ export function Navbar({ isDark, onToggleTheme }: NavbarProps) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4 transition-all duration-300">
+      <div ref={sentinelRef} className="absolute top-0 h-4 pointer-events-none" />
       <nav
         aria-label="Main Navigation"
         className={`max-w-6xl mx-auto rounded-full px-5 sm:px-7 py-3 flex items-center justify-between transition-all duration-300 m3-glass-nav ${
           isScrolled
-            ? isDark
-              ? 'bg-[#1e1a24]/80 border border-[#49454f]/60 shadow-xl shadow-black/30'
-              : 'bg-[#fdf8fd]/85 border border-[#cac4d0]/60 shadow-lg shadow-black/5'
-            : isDark
-            ? 'bg-[#1e1a24]/50 border border-[#49454f]/30'
-            : 'bg-[#fdf8fd]/60 border border-[#cac4d0]/30'
+            ? 'bg-[var(--md-sys-color-surface-container)]/80 border border-[var(--md-sys-color-outline-variant)] shadow-md'
+            : 'bg-transparent border border-transparent'
         }`}
       >
         {/* Brand Logo */}
@@ -85,19 +90,31 @@ export function Navbar({ isDark, onToggleTheme }: NavbarProps) {
         </div>
 
         {/* Actions (Theme Toggle & CTA) */}
-        <div className="flex items-center gap-2.5">
-          <button
-            onClick={onToggleTheme}
-            className="p-2.5 rounded-full bg-[var(--md-sys-color-surface-container)] hover:bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-primary)] border border-[var(--md-sys-color-outline-variant)] transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
-            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-          >
-            {isDark ? (
-              <Sun className="w-4 h-4 text-[#ffd8e4]" />
-            ) : (
-              <Moon className="w-4 h-4 text-[#6750a4]" />
+        <div className="flex items-center gap-2.5 relative">
+          <div className="relative">
+            <button
+              onClick={() => setShowThemeMenu(!showThemeMenu)}
+              className="p-2.5 rounded-full bg-[var(--md-sys-color-surface-container)] hover:bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-primary)] border border-[var(--md-sys-color-outline-variant)] transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-sm flex items-center gap-1.5"
+              aria-label="Change theme"
+            >
+              {theme === 'dark' ? <Moon className="w-4 h-4" /> : theme === 'light' ? <Sun className="w-4 h-4" /> : <Monitor className="w-4 h-4" />}
+              <ChevronDown className="w-3 h-3 opacity-60" />
+            </button>
+
+            {showThemeMenu && (
+              <div className="absolute top-full right-0 mt-3 py-1 w-32 bg-[var(--md-sys-color-surface-container)] rounded-lg shadow-lg border border-[var(--md-sys-color-outline-variant)] z-50 overflow-hidden">
+                {(['light', 'dark', 'system'] as Theme[]).map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => { onToggleTheme(t); setShowThemeMenu(false) }}
+                    className={`w-full text-left px-4 py-2 text-xs font-medium capitalize transition-colors hover:bg-[var(--md-sys-color-surface-container-high)] ${theme === t ? 'text-[var(--md-sys-color-primary)]' : 'text-[var(--md-sys-color-on-surface)]'}`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
             )}
-          </button>
+          </div>
 
           <Button
             size="sm"
