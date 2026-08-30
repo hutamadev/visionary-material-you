@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTheme } from '@/hooks/useTheme'
+import { useTrackSectionView } from '@/hooks/useTrackSectionView'
 import { MainLayout } from '@/layouts/MainLayout'
 import { StarfieldBackground } from '@/components/StarfieldBackground'
 import { HeroSection } from '@/features/hero/HeroSection'
@@ -23,6 +24,15 @@ const sectionMotionProps = {
 export default function App() {
   const { isDark } = useTheme()
   const { scrollYProgress } = useScroll()
+
+  // Section view tracking refs
+  const aboutRef = useTrackSectionView('about')
+  const servicesRef = useTrackSectionView('services')
+  const workflowRef = useTrackSectionView('workflow')
+  const portfolioRef = useTrackSectionView('portfolio')
+  const testimonialsRef = useTrackSectionView('testimonials')
+  const teamRef = useTrackSectionView('team')
+  const ctaRef = useTrackSectionView('contact-cta')
 
   // Deep spatial ambient glow parallax shifts
   const bgOrb1Y = useTransform(scrollYProgress, [0, 1], ['0px', '400px'])
@@ -56,31 +66,31 @@ export default function App() {
       <HeroSection isDark={isDark} />
 
       <div className="relative mx-auto max-w-6xl space-y-20 px-4 pb-12 sm:space-y-32 sm:px-6">
-        <motion.div {...sectionMotionProps}>
+        <motion.div ref={aboutRef} {...sectionMotionProps}>
           <AboutSection />
         </motion.div>
 
-        <motion.div {...sectionMotionProps}>
+        <motion.div ref={servicesRef} {...sectionMotionProps}>
           <ServicesSection />
         </motion.div>
 
-        <motion.div {...sectionMotionProps}>
+        <motion.div ref={workflowRef} {...sectionMotionProps}>
           <WorkflowSection />
         </motion.div>
 
-        <motion.div {...sectionMotionProps}>
+        <motion.div ref={portfolioRef} {...sectionMotionProps}>
           <PortfolioSection />
         </motion.div>
 
-        <motion.div {...sectionMotionProps}>
+        <motion.div ref={testimonialsRef} {...sectionMotionProps}>
           <TestimonialsSection />
         </motion.div>
 
-        <motion.div {...sectionMotionProps}>
+        <motion.div ref={teamRef} {...sectionMotionProps}>
           <TeamSection />
         </motion.div>
 
-        <motion.div {...sectionMotionProps}>
+        <motion.div ref={ctaRef} {...sectionMotionProps}>
           <CtaSection />
         </motion.div>
 
@@ -91,3 +101,4 @@ export default function App() {
     </MainLayout>
   )
 }
+
