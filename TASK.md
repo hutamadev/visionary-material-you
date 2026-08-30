@@ -74,12 +74,14 @@ _Fokus: Telemetri, PWA, Dynamic Theme, dan Advanced UX Polish._
 - [x] **Services cards** — `ServicesSection.tsx`: `<motion.div>` spring hover + `whileInView` staggered entrance. Icon container `rotate: -6` spring. Arrow icon motion opacity/translate.
 - [x] **Team cards** — `TeamSection.tsx`: `<motion.div>` spring hover (`scale: 1.04, y: -8`). Avatar bouncy spring + `rotate: 4`. Social links `<motion.a>` dengan `whileHover` scale + color spring.
 
-### 3. Telemetry & User Insights
+### 3. Telemetry & User Insights ✅
 
-- [ ] **Integrasi Analitik**: Implementasi [Vercel Analytics](https://vercel.com/analytics) atau [Plausible](https://plausible.io/) untuk melacak _user journey_ tanpa mengorbankan privasi.
-- [ ] **Custom Event Tracking**: Pelacakan event khusus:
-  - CTA Form Submission (event `cta_form_submit`).
-  - Durasi interaksi dengan `HeroGlobe` (Three.js canvas).
+- [x] **Integrasi Analitik**: Implementasi [Vercel Analytics](https://vercel.com/analytics) (`@vercel/analytics` + `@vercel/speed-insights`) untuk melacak _user journey_ dan Core Web Vitals tanpa mengorbankan privasi.
+- [x] **Custom Event Tracking**: Pelacakan event khusus via `src/lib/analytics.ts` (type-safe abstraction):
+  - CTA Form Submission (event `cta_form_submit`) + error tracking (`cta_form_error`).
+  - Durasi interaksi dengan `HeroGlobe` (Three.js canvas) — `globe_interaction_start` + `globe_interaction_duration`.
+  - Theme toggle tracking (`theme_toggle`).
+  - Section visibility tracking (`section_view`) via `useTrackSectionView` hook.
 
 ### 4. Progressive Web App (PWA)
 

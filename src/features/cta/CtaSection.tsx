@@ -3,6 +3,7 @@ import { Sparkles, CheckCircle, Send, AlertCircle, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { ctaEmailSchema } from '@/lib/validations/cta.schema'
+import { trackEvent } from '@/lib/analytics'
 
 export function CtaSection() {
   const [email, setEmail] = useState('')
@@ -25,12 +26,17 @@ export function CtaSection() {
 
     if (!validationResult.success) {
       const firstIssue = validationResult.error.issues[0]
-      setErrorMessage(firstIssue?.message ?? 'Invalid email address')
+      const errorType = firstIssue?.message ?? 'validation_failed'
+      setErrorMessage(errorType)
+      trackEvent('cta_form_error', { error_type: errorType })
       return
     }
 
     setErrorMessage(null)
     setIsSubmitting(true)
+    trackEvent('cta_form_submit', {
+      email_domain: email.split('@')[1] ?? 'unknown',
+    })
 
     // Simulate smooth asynchronous frontend submission feedback
     setTimeout(() => {

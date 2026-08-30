@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { trackEvent } from '@/lib/analytics'
 
 interface HeroGlobeProps {
   isDark: boolean
@@ -16,6 +17,8 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
     let isDisposed = false
     let animationFrameId: number
     let cleanupFn: (() => void) | null = null
+    let interactionStartTime: number | null = null
+    let hasTrackedInteraction = false
 
     // Defer WebGL setup slightly to yield main thread to first paint and eliminate TBT
     const timerId = setTimeout(() => {
@@ -168,6 +171,28 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
 
       window.addEventListener('mousemove', onMouseMove, { passive: true })
 
+      // Globe interaction tracking (mouseenter/mouseleave on canvas)
+      const onCanvasEnter = () => {
+        if (!hasTrackedInteraction) {
+          interactionStartTime = performance.now()
+          trackEvent('globe_interaction_start', {})
+        }
+      }
+
+      const onCanvasLeave = () => {
+        if (interactionStartTime !== null && !hasTrackedInteraction) {
+          const durationSeconds = Math.round((performance.now() - interactionStartTime) / 1000)
+          if (durationSeconds >= 1) {
+            trackEvent('globe_interaction_duration', { duration_seconds: durationSeconds })
+            hasTrackedInteraction = true
+          }
+          interactionStartTime = null
+        }
+      }
+
+      currentMount.addEventListener('mouseenter', onCanvasEnter, { passive: true })
+      currentMount.addEventListener('mouseleave', onCanvasLeave, { passive: true })
+
       // Viewport Intersection Observer
       const observer = new IntersectionObserver(
         ([entry]) => {
@@ -217,6 +242,8 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
         observer.disconnect()
         window.removeEventListener('resize', handleResize)
         window.removeEventListener('mousemove', onMouseMove)
+        currentMount.removeEventListener('mouseenter', onCanvasEnter)
+        currentMount.removeEventListener('mouseleave', onCanvasLeave)
         cancelAnimationFrame(animationFrameId)
 
         if (currentMount && renderer.domElement.parentNode === currentMount) {
