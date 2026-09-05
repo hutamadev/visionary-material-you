@@ -89,7 +89,25 @@ export function StarfieldBackground({ isDark }: StarfieldBackgroundProps) {
     const colors = isDark ? darkStarColors : lightStarColors
 
     let frame = 0
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
     const render = () => {
+      if (prefersReducedMotion) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        for (const star of stars) {
+          const colorIdx = Math.floor(star.x % colors.length)
+          ctx.beginPath()
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2)
+          ctx.fillStyle = colors[colorIdx]
+          ctx.globalAlpha = star.opacity
+          ctx.fill()
+        }
+        ctx.globalAlpha = 1
+        return
+      }
+
       if (!isRunning || document.hidden) {
         animationId = requestAnimationFrame(render)
         return

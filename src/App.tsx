@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useTheme } from '@/hooks/useTheme'
 import { useTrackSectionView } from '@/hooks/useTrackSectionView'
 import { MainLayout } from '@/layouts/MainLayout'
@@ -23,7 +23,6 @@ const sectionMotionProps = {
 
 export default function App() {
   const { isDark } = useTheme()
-  const { scrollYProgress } = useScroll()
 
   // Section view tracking refs
   const aboutRef = useTrackSectionView('about')
@@ -34,34 +33,10 @@ export default function App() {
   const teamRef = useTrackSectionView('team')
   const ctaRef = useTrackSectionView('contact-cta')
 
-  // Deep spatial ambient glow parallax shifts
-  const bgOrb1Y = useTransform(scrollYProgress, [0, 1], ['0px', '400px'])
-  const bgOrb2Y = useTransform(scrollYProgress, [0, 1], ['0px', '-300px'])
-
   return (
     <MainLayout>
       {/* Global Starfield Overlay — fixed on top of everything, pointer-events: none */}
       <StarfieldBackground isDark={isDark} />
-
-      {/* Hardware-Accelerated Dynamic Ambient Background Parallax Elements */}
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden contain-strict">
-        <motion.div
-          style={{
-            y: bgOrb1Y,
-            background:
-              'radial-gradient(circle, var(--md-sys-color-primary-container) 0%, transparent 70%)',
-          }}
-          className="h-lg absolute top-1/3 -left-32 w-lg transform-gpu rounded-full opacity-35"
-        />
-        <motion.div
-          style={{
-            y: bgOrb2Y,
-            background:
-              'radial-gradient(circle, var(--md-sys-color-tertiary-container) 0%, transparent 70%)',
-          }}
-          className="absolute top-2/3 -right-32 h-120 w-120 transform-gpu rounded-full opacity-30"
-        />
-      </div>
 
       <HeroSection isDark={isDark} />
 

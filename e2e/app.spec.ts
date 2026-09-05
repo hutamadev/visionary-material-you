@@ -9,7 +9,7 @@ test.describe('Vibecoding Material You 3 Web App', () => {
     await expect(page).toHaveTitle(
       /Visionary · Material You 3 Digital Engineering/
     )
-    const brand = page.getByText('Vibecoding', { exact: false }).first()
+    const brand = page.getByText('Visionary', { exact: false }).first()
     await expect(brand).toBeVisible()
   })
 

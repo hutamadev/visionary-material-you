@@ -59,8 +59,8 @@ export function FooterSection() {
 
             {/* Email Card */}
             <a
-              href="mailto:hello@vibecoding.dev"
-              aria-label="Send email inquiry to hello@vibecoding.dev"
+              href="mailto:contact@visionary.dev"
+              aria-label="Send email inquiry to contact@visionary.dev"
               className="m3-tonal-mint group flex flex-col items-center gap-3 rounded-3xl p-6 text-center shadow-sm transition-transform duration-200 hover:scale-[1.02] sm:p-7"
             >
               <div
@@ -72,7 +72,7 @@ export function FooterSection() {
               <div>
                 <h3 className="mb-1 text-base font-bold">Direct Inquiry</h3>
                 <p className="text-xs leading-relaxed break-all opacity-85">
-                  hello@vibecoding.dev
+                  contact@visionary.dev
                   <br />
                   Average Response: &lt; 2 Hours
                 </p>
@@ -116,7 +116,7 @@ export function FooterSection() {
               </div>
               <div>
                 <span className="text-lg font-extrabold tracking-tight text-(--md-sys-color-on-surface)">
-                  Vibecoding
+                  Visionary
                 </span>
                 <p className="text-[10px] font-bold tracking-wider text-(--md-sys-color-primary) uppercase">
                   Material You 3 Google
@@ -242,8 +242,7 @@ export function FooterSection() {
         {/* Bottom Bar: Copyright & Socials */}
         <div className="flex flex-col items-center justify-between gap-4 border-t border-(--md-sys-color-outline-variant) pt-8 text-xs text-(--md-sys-color-on-surface-variant) sm:flex-row">
           <div>
-            © 2026 Vibecoding Project · Visionary Tech Solutions. All rights
-            reserved.
+            © 2026 Visionary Tech Solutions. All rights reserved.
           </div>
 
           <div className="flex items-center gap-3">

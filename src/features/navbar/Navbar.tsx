@@ -69,8 +69,8 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
         {/* Brand Logo */}
         <button
           onClick={() => scrollTo('home')}
-          aria-label="Vibecoding - Back to top"
-          className="group flex cursor-pointer items-center gap-2.5 text-left"
+          aria-label="Visionary - Back to top"
+          className="group flex cursor-pointer items-center gap-2.5 text-left rounded-full focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none"
         >
           <div
             className="flex h-10 w-10 items-center justify-center rounded-full bg-(--md-sys-color-primary) text-sm font-bold text-(--md-sys-color-on-primary) shadow-md transition-transform group-hover:scale-105"
@@ -80,10 +80,10 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
           </div>
           <div>
             <div className="flex items-center gap-1.5 text-base font-bold tracking-tight text-(--md-sys-color-on-surface)">
-              Vibecoding
-              <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-(--md-sys-color-primary)" />
+              Visionary
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-(--md-sys-color-primary)" />
             </div>
-            <span className="hidden text-[10px] font-semibold tracking-wider text-(--md-sys-color-on-surface-variant) uppercase sm:block">
+            <span className="hidden text-xs font-semibold tracking-wider text-(--md-sys-color-on-surface-variant) uppercase sm:block">
               Material You 3
             </span>
           </div>
@@ -95,7 +95,7 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
             <button
               key={item.target}
               onClick={() => scrollTo(item.target)}
-              className="cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors duration-200 hover:bg-(--md-sys-color-surface-container-high) hover:text-(--md-sys-color-primary)"
+              className="cursor-pointer rounded-full px-3.5 py-2 text-xs font-semibold transition-colors duration-200 hover:bg-(--md-sys-color-surface-container-high) hover:text-(--md-sys-color-primary) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none"
             >
               {item.label}
             </button>
@@ -107,7 +107,7 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
           <div className="relative">
             <button
               onClick={() => setShowThemeMenu(!showThemeMenu)}
-              className="flex cursor-pointer items-center gap-1.5 rounded-full border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) p-2.5 text-(--md-sys-color-primary) shadow-sm transition-all duration-200 hover:scale-105 hover:bg-(--md-sys-color-surface-container-high) active:scale-95"
+              className="flex cursor-pointer items-center gap-1.5 rounded-full border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) p-2.5 text-(--md-sys-color-primary) shadow-sm transition-all duration-200 hover:scale-105 hover:bg-(--md-sys-color-surface-container-high) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none active:scale-95"
               aria-label="Change theme"
             >
               {theme === 'dark' ? (

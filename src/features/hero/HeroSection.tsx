@@ -112,7 +112,7 @@ export function HeroSection({ isDark }: HeroSectionProps) {
             </Badge>
             <Badge variant="sky" className="hidden sm:inline-flex">
               <Cpu className="h-3.5 w-3.5" />
-              <span>Vibecoding Architecture</span>
+              <span>Visionary Web Architecture</span>
             </Badge>
           </motion.div>
 

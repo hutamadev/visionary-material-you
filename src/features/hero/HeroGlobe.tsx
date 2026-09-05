@@ -204,8 +204,16 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
 
       // Animation Loop
       const startTime = performance.now()
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches
 
       const animate = () => {
+        if (prefersReducedMotion) {
+          renderer.render(scene, camera)
+          return
+        }
+
         animationFrameId = requestAnimationFrame(animate)
         if (!isVisible) return
 
