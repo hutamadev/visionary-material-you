@@ -23,6 +23,12 @@ colors:
   dark-surface-container: "#211f26"
   dark-primary: "#d0bcff"
   dark-primary-container: "#4f378b"
+  tonal-mint: "#d7f2e3"
+  tonal-mint-dark: "#0b3d2c"
+  tonal-rose: "#ffd8e4"
+  tonal-rose-dark: "#492532"
+  tonal-amber: "#fdf3c9"
+  tonal-amber-dark: "#3b3300"
 typography:
   display:
     fontFamily: "Inter Variable, Inter, sans-serif"

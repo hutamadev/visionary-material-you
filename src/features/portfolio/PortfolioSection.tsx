@@ -98,7 +98,7 @@ export function PortfolioSection() {
                     <div className="text-2xl font-black tracking-tight">
                       {proj.metric}
                     </div>
-                    <div className="text-[11px] font-semibold tracking-wider uppercase opacity-80">
+                    <div className="text-xs font-semibold tracking-wider uppercase opacity-90">
                       {proj.metricLabel}
                     </div>
                   </div>
@@ -115,7 +115,7 @@ export function PortfolioSection() {
                   {proj.tags.map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="rounded-full bg-(--md-sys-color-surface-container-high) px-2.5 py-1 text-[11px] font-medium text-(--md-sys-color-on-surface-variant)"
+                      className="rounded-full bg-(--md-sys-color-surface-container-high) px-2.5 py-1 text-xs font-medium text-(--md-sys-color-on-surface-variant)"
                     >
                       {tag}
                     </span>

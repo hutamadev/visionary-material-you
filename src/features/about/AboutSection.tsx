@@ -44,7 +44,7 @@ export function AboutSection() {
                 Our Genesis
               </span>
               <h3 className="text-2xl font-bold text-(--md-sys-color-on-surface) sm:text-3xl">
-                Built for builders, designed for humans.
+                Architected for scale, crafted for human impact.
               </h3>
             </div>
 
@@ -110,7 +110,7 @@ export function AboutSection() {
                       <h3 className="text-lg font-bold tracking-tight sm:text-xl">
                         {v.title}
                       </h3>
-                      <span className="rounded-full bg-black/10 px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase dark:bg-white/15">
+                      <span className="rounded-full bg-black/10 px-2.5 py-0.5 text-xs font-bold tracking-wider uppercase dark:bg-white/15">
                         {v.badge}
                       </span>
                     </div>

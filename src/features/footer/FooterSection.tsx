@@ -118,7 +118,7 @@ export function FooterSection() {
                 <span className="text-lg font-extrabold tracking-tight text-(--md-sys-color-on-surface)">
                   Visionary
                 </span>
-                <p className="text-[10px] font-bold tracking-wider text-(--md-sys-color-primary) uppercase">
+                <p className="text-xs font-bold tracking-wider text-(--md-sys-color-primary) uppercase">
                   Material You 3 Google
                 </p>
               </div>
@@ -130,7 +130,7 @@ export function FooterSection() {
             </p>
 
             {/* Operational Status Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full bg-(--md-sys-color-surface-container-high) px-3 py-1 text-[11px] font-semibold text-(--md-sys-color-on-surface)">
+            <div className="inline-flex items-center gap-2 rounded-full bg-(--md-sys-color-surface-container-high) px-3 py-1 text-xs font-semibold text-(--md-sys-color-on-surface)">
               <span
                 className="h-2 w-2 animate-pulse rounded-full bg-emerald-500"
                 aria-hidden="true"

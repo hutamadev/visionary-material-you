@@ -105,7 +105,7 @@ export function ServicesSection() {
                     {service.tags.map((tag, tagIdx) => (
                       <span
                         key={tagIdx}
-                        className="rounded-full bg-(--md-sys-color-surface-container-high) px-2.5 py-1 text-[11px] font-medium text-(--md-sys-color-on-surface-variant)"
+                        className="rounded-full bg-(--md-sys-color-surface-container-high) px-2.5 py-1 text-xs font-medium text-(--md-sys-color-on-surface-variant)"
                       >
                         {tag}
                       </span>
