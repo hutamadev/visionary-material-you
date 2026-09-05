@@ -126,8 +126,8 @@ body {
 
 /* Performance Optimization for Scroll Fluidity */
 .m3-section-container {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 600px;
+  /* Allow interactive hover lifts and shadows to overflow without paint clipping */
+  overflow: visible;
 }
 
 /* Material You 3 Elevation & Tonal Surface Layers */
@@ -155,8 +155,7 @@ body {
 
 .m3-card:hover {
   background-color: var(--md-sys-color-surface-container-high);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px var(--md-sys-color-shadow);
+  box-shadow: 0 16px 36px var(--md-sys-color-shadow);
 }
 
 /* M3 Tonal Palette Pastels with proper contrast */

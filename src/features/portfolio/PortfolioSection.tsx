@@ -55,7 +55,7 @@ export function PortfolioSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
-            whileHover={{ scale: 1.03, y: -6 }}
+            whileHover={{ y: -8 }}
             whileTap={{ scale: 0.98 }}
             transition={springTransition}
           >

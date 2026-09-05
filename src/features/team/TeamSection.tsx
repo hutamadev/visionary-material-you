@@ -58,7 +58,7 @@ export function TeamSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
-            whileHover={{ scale: 1.04, y: -8 }}
+            whileHover={{ y: -8 }}
             whileTap={{ scale: 0.97 }}
             transition={springTransition}
           >

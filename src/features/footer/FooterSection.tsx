@@ -16,9 +16,9 @@ export function FooterSection() {
     <footer
       id="contact"
       aria-label="Footer & Contact"
-      className="scroll-mt-28 border-t border-(--md-sys-color-outline-variant)/40 bg-(--md-sys-color-surface-container-low)/60 pt-16 pb-12"
+      className="scroll-mt-28 py-12"
     >
-      <div className="mx-auto max-w-6xl space-y-16 px-4 sm:px-6">
+      <div className="space-y-16 rounded-[2.5rem] border border-(--md-sys-color-outline-variant)/40 bg-(--md-sys-color-surface-container) p-8 shadow-lg sm:p-12 lg:p-16">
         {/* Top Section: Contact Cards & Inquiries */}
         <div>
           <div className="mb-10 flex flex-col items-center space-y-3 text-center">

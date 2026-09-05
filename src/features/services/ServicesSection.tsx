@@ -58,14 +58,14 @@ export function ServicesSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-60px' }}
-              whileHover={{ scale: 1.03, y: -6 }}
+              whileHover={{ y: -8 }}
               whileTap={{ scale: 0.98 }}
               transition={springTransition}
             >
               <Card
                 as="article"
                 aria-label={service.title}
-                className="m3-card group relative flex h-full cursor-pointer flex-col justify-between overflow-hidden p-8"
+                className="m3-card group relative flex h-full cursor-pointer flex-col justify-between p-8"
               >
                 {/* Card Header & Icon */}
                 <div className="space-y-5">
