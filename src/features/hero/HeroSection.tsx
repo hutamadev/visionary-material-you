@@ -72,7 +72,7 @@ export function HeroSection({ isDark }: HeroSectionProps) {
           background:
             'radial-gradient(circle, var(--md-sys-color-primary-container) 0%, transparent 70%)',
         }}
-        className="pointer-events-none absolute top-1/4 -right-20 -z-10 h-96 w-96 transform-gpu rounded-full opacity-40 will-change-transform"
+        className="pointer-events-none absolute top-1/4 -right-20 -z-10 h-96 w-96 transform-gpu rounded-full opacity-40"
       />
       <motion.div
         style={{
@@ -80,13 +80,13 @@ export function HeroSection({ isDark }: HeroSectionProps) {
           background:
             'radial-gradient(circle, var(--md-sys-color-tertiary-container) 0%, transparent 70%)',
         }}
-        className="pointer-events-none absolute bottom-10 left-10 -z-10 h-80 w-80 transform-gpu rounded-full opacity-30 will-change-transform"
+        className="pointer-events-none absolute bottom-10 left-10 -z-10 h-80 w-80 transform-gpu rounded-full opacity-30"
       />
 
       {/* 3D Three.js Canvas Container with Parallax Elevation */}
       <motion.div
         style={{ y: globeY, scale: globeScale, opacity: globeOpacity }}
-        className="pointer-events-auto absolute inset-0 z-0 will-change-transform"
+        className="pointer-events-auto absolute inset-0 z-0"
       >
         <Suspense fallback={<HeroGlobeFallback />}>
           <HeroGlobe isDark={isDark} />
@@ -96,7 +96,7 @@ export function HeroSection({ isDark }: HeroSectionProps) {
       {/* Hero Content with Smooth Spring-based Motion & Parallax */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-10 mx-auto w-full max-w-6xl px-4 will-change-transform sm:px-6"
+        className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6"
       >
         <div className="space-y-8 text-left lg:w-7/12">
           {/* Top Pill Badges */}

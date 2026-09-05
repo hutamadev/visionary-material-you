@@ -277,5 +277,5 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
     }
   }, [isDark])
 
-  return <div ref={mountRef} className="h-full w-full will-change-transform" />
+  return <div ref={mountRef} className="h-full w-full" />
 }

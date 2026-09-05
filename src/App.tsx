@@ -18,7 +18,7 @@ const sectionMotionProps = {
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: '-40px' },
   transition: { duration: 0.6, ease: [0.2, 0, 0, 1] as const },
-  className: 'm3-section-container will-change-transform transform-gpu',
+  className: 'm3-section-container transform-gpu',
 }
 
 export default function App() {
@@ -51,7 +51,7 @@ export default function App() {
             background:
               'radial-gradient(circle, var(--md-sys-color-primary-container) 0%, transparent 70%)',
           }}
-          className="h-lg absolute top-1/3 -left-32 w-lg transform-gpu rounded-full opacity-35 will-change-transform"
+          className="h-lg absolute top-1/3 -left-32 w-lg transform-gpu rounded-full opacity-35"
         />
         <motion.div
           style={{
@@ -59,7 +59,7 @@ export default function App() {
             background:
               'radial-gradient(circle, var(--md-sys-color-tertiary-container) 0%, transparent 70%)',
           }}
-          className="absolute top-2/3 -right-32 h-120 w-120 transform-gpu rounded-full opacity-30 will-change-transform"
+          className="absolute top-2/3 -right-32 h-120 w-120 transform-gpu rounded-full opacity-30"
         />
       </div>
 

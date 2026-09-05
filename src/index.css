@@ -236,3 +236,19 @@ body {
 .animate-pulse-soft {
   animation: pulse-soft 3s ease-in-out infinite;
 }
+
+/* Accessibility: WCAG 2.2 Intentional Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  .animate-float,
+  .animate-pulse-soft {
+    animation: none !important;
+  }
+
+  .m3-card:hover {
+    transform: none !important;
+  }
+}

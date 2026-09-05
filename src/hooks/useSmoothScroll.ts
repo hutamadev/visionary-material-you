@@ -13,15 +13,19 @@ export function scrollToTarget(
 ): void {
   if (typeof window === 'undefined') return
 
+  const prefersReducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
   const offset = options?.offset ?? 0
-  const duration = options?.duration ?? 1.0
+  const duration = prefersReducedMotion ? 0 : (options?.duration ?? 1.0)
 
   if (target === 'home' || target === '#home' || target === 0) {
     if (lenisInstance) {
-      lenisInstance.scrollTo(0, { duration })
+      lenisInstance.scrollTo(0, { duration, immediate: prefersReducedMotion })
       return
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
     return
   }
 
@@ -34,6 +38,7 @@ export function scrollToTarget(
     lenisInstance.scrollTo(formattedTarget, {
       offset,
       duration,
+      immediate: prefersReducedMotion,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     })
     return
@@ -65,12 +70,15 @@ export function scrollToTarget(
  */
 export function useSmoothScroll() {
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const prefersReducedMotion = mediaQuery.matches
+
     const lenis = new Lenis({
-      duration: 0.9,
+      duration: prefersReducedMotion ? 0 : 0.9,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
-      smoothWheel: true,
+      smoothWheel: !prefersReducedMotion,
       wheelMultiplier: 1.0,
       touchMultiplier: 1.0,
       syncTouch: false,

@@ -58,7 +58,6 @@ export function PortfolioSection() {
             whileHover={{ scale: 1.03, y: -6 }}
             whileTap={{ scale: 0.98 }}
             transition={springTransition}
-            className="will-change-transform"
           >
             <Card
               as="article"

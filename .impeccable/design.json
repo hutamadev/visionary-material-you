@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-05T00:00:00.000Z",
+  "title": "Design System: Visionary",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Iris Lavender",
+        "canonical": "oklch(48% 0.18 290)",
+        "tonalRamp": ["#21005d", "#381e72", "#4f378b", "#6750a4", "#8069bd", "#9a82d7", "#b59cf2", "#d0bcff"]
+      },
+      "secondary": {
+        "role": "secondary",
+        "displayName": "Slate Violet",
+        "canonical": "oklch(45% 0.05 295)",
+        "tonalRamp": ["#1d192b", "#332d41", "#4a4458", "#625b71", "#7b738b", "#958da5", "#b0a8c0", "#ccc2dc"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "M3 Surface Container",
+        "canonical": "oklch(96% 0.01 300)",
+        "tonalRamp": ["#0f0d13", "#141218", "#1d1b20", "#211f26", "#ece6f0", "#f3edf7", "#f7f2fa", "#fdf8fd"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Extrabold",
+        "purpose": "Hero headlines and key metrics."
+      },
+      "headline": {
+        "displayName": "Headline Bold",
+        "purpose": "Section headings."
+      },
+      "body": {
+        "displayName": "Body Regular",
+        "purpose": "Paragraphs and explanations."
+      }
+    },
+    "shadows": [
+      {
+        "name": "tonal-diffuse",
+        "value": "0 12px 32px var(--md-sys-color-shadow)",
+        "purpose": "Soft ambient glow under hovered cards."
+      }
+    ],
+    "motion": [
+      {
+        "name": "m3-standard",
+        "value": "cubic-bezier(0.2, 0, 0, 1)",
+        "purpose": "Material You 3 standard curve for fluid easing."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action Pill",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary conversion button with full pill radius.",
+      "html": "<button class=\"ds-btn-primary\">Schedule Consultation</button>",
+      "css": ".ds-btn-primary { background: var(--md-sys-color-primary, #6750a4); color: var(--md-sys-color-on-primary, #ffffff); font-family: 'Inter Variable', sans-serif; font-size: 14px; font-weight: 600; height: 44px; padding: 0 24px; border: none; border-radius: 9999px; cursor: pointer; transition: all 0.2s cubic-bezier(0.2, 0, 0, 1); display: inline-flex; align-items: center; justify-content: center; } .ds-btn-primary:hover { opacity: 0.92; box-shadow: 0 4px 12px var(--md-sys-color-shadow, rgba(0,0,0,0.1)); } .ds-btn-primary:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Tonal Action Pill",
+      "kind": "button",
+      "refersTo": "button-tonal",
+      "description": "Secondary action button utilizing primary container color.",
+      "html": "<button class=\"ds-btn-tonal\">Explore Services</button>",
+      "css": ".ds-btn-tonal { background: var(--md-sys-color-primary-container, #eaddff); color: var(--md-sys-color-on-primary-container, #21005d); font-family: 'Inter Variable', sans-serif; font-size: 14px; font-weight: 600; height: 44px; padding: 0 24px; border: none; border-radius: 9999px; cursor: pointer; transition: all 0.2s cubic-bezier(0.2, 0, 0, 1); display: inline-flex; align-items: center; justify-content: center; } .ds-btn-tonal:hover { filter: brightness(1.04); } .ds-btn-tonal:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Tonal Feature Card",
+      "kind": "card",
+      "refersTo": "card-filled",
+      "description": "Content card with 28px rounded corners and subtle outline.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">WebGL 3D Architecture</h3><p class=\"ds-card-body\">High-performance particle visualizers crafted with Three.js and custom shaders.</p></div>",
+      "css": ".ds-card { background: var(--md-sys-color-surface-container, #f3edf7); border: 1px solid var(--md-sys-color-outline-variant, #cac4d0); border-radius: 28px; padding: 24px 32px; font-family: 'Inter Variable', sans-serif; transition: all 0.3s cubic-bezier(0.2, 0, 0, 1); } .ds-card:hover { background: var(--md-sys-color-surface-container-high, #ece6f0); transform: translateY(-4px); box-shadow: 0 12px 32px var(--md-sys-color-shadow, rgba(0,0,0,0.08)); } .ds-card-title { font-size: 20px; font-weight: 700; color: var(--md-sys-color-on-surface, #1d1b20); margin: 0 0 8px 0; } .ds-card-body { font-size: 14px; color: var(--md-sys-color-on-surface-variant, #49454f); line-height: 1.6; margin: 0; }"
+    },
+    {
+      "name": "Pill Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Continuous curve text input field.",
+      "html": "<input type=\"email\" class=\"ds-input\" placeholder=\"Enter your enterprise email...\" />",
+      "css": ".ds-input { height: 48px; width: 100%; border-radius: 9999px; border: 1px solid var(--md-sys-color-outline, #79747e); background: var(--md-sys-color-surface-container, #f3edf7); padding: 0 20px; font-family: 'Inter Variable', sans-serif; font-size: 14px; color: var(--md-sys-color-on-surface, #1d1b20); outline: none; transition: border-color 0.2s, box-shadow 0.2s; } .ds-input:focus { border-color: var(--md-sys-color-primary, #6750a4); box-shadow: 0 0 0 3px var(--md-sys-color-primary-container, #eaddff); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Architectural Fluid",
+    "overview": "Visionary adalah manifestasi sistem desain Google Material You 3 (M3) dengan pendekatan teknik bedah yang presisi (surgical & restrained). Desain menolak keras tren AI Slop — tidak ada gradasi ungu-ke-biru generik tanpa fungsi, tidak ada tumpukan kartu tanpa tujuan hierarki, dan tidak ada dekorasi visual acak.",
+    "keyCharacteristics": [
+      "Kepatuhan total terhadap spesifikasi Google Material You 3 dan token semantik CSS.",
+      "Elevasi tonal terukur menggantikan ketergantungan pada drop-shadow pekat.",
+      "Bentuk kapsul penuh (pill shape) untuk seluruh kontrol aksi.",
+      "Zero AI Slop: Tipografi fungsional berhierarki tegas, palet warna harmonis berbasis tonal ramps, dan mikro-interaksi spring terkalibrasi."
+    ],
+    "rules": [
+      { "name": "The Strict Tonal Role Rule", "body": "Dilarang menggunakan warna aksen primer di luar komponen aksi langsung (CTA, link aktif, pill terpilih). Seluruh permukaan latar wajib menggunakan deret surface-container-*.", "section": "colors" },
+      { "name": "The No-Unanchored-Gradient Rule", "body": "Dilarang menambahkan linear gradient dekoratif tanpa sumber cahaya kontekstual.", "section": "colors" },
+      { "name": "The Surgical Weight Rule", "body": "Maksimal 3 tingkatan bobot tipografi dalam satu viewport (800/700 untuk judul, 600 untuk label/interaksi, 400 untuk teks isi).", "section": "typography" },
+      { "name": "The Single Momentum Rule", "body": "Dilarang membuat kontainer dengan internal scrolling vertikal di dalam halaman kecuali modal dialog.", "section": "layout" },
+      { "name": "The Tonal Layering Rule", "body": "Elevasi wajib dicapai melalui perpindahan tingkat kontainer (low → container → high), bukan dengan mempertebal bayangan hitam pekat.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do gunakan token CSS native var(--md-sys-color-*) untuk semua penetapan warna.",
+      "Do pertahankan radius rounded-full untuk semua tombol dan kontrol interaktif.",
+      "Do gunakan elevasi tonal (surface-container ke surface-container-high) saat state aktif/hover.",
+      "Do terapkan rasio kontras teks minimal 4.5:1 untuk keterbacaan standar WCAG AA."
+    ],
+    "donts": [
+      "Don't gunakan gradasi ungu-ke-biru klise ala template AI generik (AI Slop).",
+      "Don't gunakan sudut tajam atau radius di bawah 8px untuk kartu konten.",
+      "Don't menggunakan warna hardcoded hex di dalam styling komponen jika token Material You sudah menyediakannya.",
+      "Don't menumpuk kartu di dalam kartu (nested card fatigue)."
+    ]
+  }
+}

@@ -61,7 +61,6 @@ export function TeamSection() {
             whileHover={{ scale: 1.04, y: -8 }}
             whileTap={{ scale: 0.97 }}
             transition={springTransition}
-            className="will-change-transform"
           >
             <Card
               as="article"
