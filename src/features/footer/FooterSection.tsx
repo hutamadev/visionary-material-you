@@ -15,10 +15,10 @@ export function FooterSection() {
   return (
     <footer
       id="contact"
-      aria-label="Footer and Contact Information"
-      className="scroll-mt-28 pt-16 pb-12"
+      aria-label="Footer & Contact"
+      className="scroll-mt-28 border-t border-(--md-sys-color-outline-variant)/40 bg-(--md-sys-color-surface-container-low)/60 pt-16 pb-12"
     >
-      <div className="space-y-16 rounded-[2.5rem] border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) p-8 shadow-lg sm:p-12 lg:p-16">
+      <div className="mx-auto max-w-6xl space-y-16 px-4 sm:px-6">
         {/* Top Section: Contact Cards & Inquiries */}
         <div>
           <div className="mb-10 flex flex-col items-center space-y-3 text-center">
@@ -250,7 +250,7 @@ export function FooterSection() {
               href="https://github.com"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-(--md-sys-color-surface-container-high) p-2 transition-all hover:scale-110 hover:text-(--md-sys-color-primary)"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-(--md-sys-color-surface-container-high) text-(--md-sys-color-on-surface-variant) transition-all hover:scale-110 hover:text-(--md-sys-color-primary) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none"
               aria-label="Visit Visionary on GitHub"
             >
               <Globe className="h-4 w-4" aria-hidden="true" />
@@ -259,7 +259,7 @@ export function FooterSection() {
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-(--md-sys-color-surface-container-high) p-2 transition-all hover:scale-110 hover:text-(--md-sys-color-primary)"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-(--md-sys-color-surface-container-high) text-(--md-sys-color-on-surface-variant) transition-all hover:scale-110 hover:text-(--md-sys-color-primary) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none"
               aria-label="Visit Visionary on LinkedIn"
             >
               <Share2 className="h-4 w-4" aria-hidden="true" />
@@ -268,7 +268,7 @@ export function FooterSection() {
               href="https://twitter.com"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-(--md-sys-color-surface-container-high) p-2 transition-all hover:scale-110 hover:text-(--md-sys-color-primary)"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-(--md-sys-color-surface-container-high) text-(--md-sys-color-on-surface-variant) transition-all hover:scale-110 hover:text-(--md-sys-color-primary) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none"
               aria-label="Visit Visionary on Twitter"
             >
               <MessageCircle className="h-4 w-4" aria-hidden="true" />

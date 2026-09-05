@@ -46,7 +46,7 @@ export function TestimonialsSection() {
                   <Star
                     key={i}
                     aria-hidden="true"
-                    className="h-4 w-4 fill-[#fae387] text-[#fae387]"
+                    className="h-4 w-4 fill-amber-400 text-amber-400"
                   />
                 ))}
               </div>
@@ -65,9 +65,9 @@ export function TestimonialsSection() {
                 className="h-12 w-12 border-2 border-(--md-sys-color-primary-container)"
               />
               <div>
-                <h3 className="text-sm font-bold text-(--md-sys-color-on-surface)">
+                <p className="text-sm font-bold text-(--md-sys-color-on-surface)">
                   {t.name}
-                </h3>
+                </p>
                 <p className="text-xs text-(--md-sys-color-on-surface-variant)">
                   {t.role} ·{' '}
                   <span className="font-semibold text-(--md-sys-color-primary)">

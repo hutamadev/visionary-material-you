@@ -1,6 +1,5 @@
 import { CheckCircle2 } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
-import { Card } from '@/components/ui/Card'
 import { workflowStepsData } from '@/features/workflow/workflow.data'
 
 export function WorkflowSection() {
@@ -25,56 +24,67 @@ export function WorkflowSection() {
         </p>
       </div>
 
-      {/* Steps Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {workflowStepsData.map((step) => {
-          const Icon = step.icon
-          return (
-            <Card
-              key={step.number}
-              as="article"
-              aria-label={`Phase ${step.number}: ${step.title}`}
-              className="relative flex flex-col justify-between border-(--md-sys-color-outline-variant) p-6 transition-all duration-300 hover:border-(--md-sys-color-primary) sm:p-7"
-            >
-              <div className="space-y-4">
-                {/* Step Indicator */}
-                <div className="flex items-center justify-between">
-                  <span
-                    className="text-3xl font-black tracking-tighter text-(--md-sys-color-primary) opacity-80"
-                    aria-hidden="true"
-                  >
-                    {step.number}
-                  </span>
-                  <div
-                    className={`h-10 w-10 rounded-full ${step.tonal} flex items-center justify-center`}
-                    aria-hidden="true"
-                  >
-                    <Icon className="h-5 w-5" />
+      {/* Stepper Pipeline Architecture */}
+      <div className="relative">
+        {/* Desktop Pipeline Connector Track */}
+        <div
+          className="pointer-events-none absolute top-16 right-8 left-8 -z-0 hidden h-0.5 bg-gradient-to-r from-(--md-sys-color-primary)/20 via-(--md-sys-color-primary) to-(--md-sys-color-primary)/20 lg:block"
+          aria-hidden="true"
+        />
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {workflowStepsData.map((step, idx) => {
+            const Icon = step.icon
+            return (
+              <article
+                key={step.number}
+                aria-label={`Phase ${step.number}: ${step.title}`}
+                className="group relative flex flex-col justify-between rounded-3xl border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) p-6 transition-all duration-300 hover:-translate-y-1 hover:border-(--md-sys-color-primary) hover:shadow-lg sm:p-7"
+              >
+                <div className="space-y-4">
+                  {/* Step Milestone Node */}
+                  <div className="flex items-center justify-between">
+                    <div
+                      className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-2xl ${step.tonal} shadow-sm transition-transform duration-300 group-hover:scale-110`}
+                      aria-hidden="true"
+                    >
+                      <Icon className="h-6 w-6" />
+                    </div>
+
+                    <span
+                      className="font-mono text-2xl font-black tracking-tighter text-(--md-sys-color-primary)"
+                      aria-hidden="true"
+                    >
+                      0{idx + 1}
+                    </span>
                   </div>
+
+                  <h3 className="text-lg font-bold tracking-tight text-(--md-sys-color-on-surface)">
+                    {step.title}
+                  </h3>
+
+                  <p className="text-xs leading-relaxed font-normal text-(--md-sys-color-on-surface-variant) sm:text-sm">
+                    {step.description}
+                  </p>
                 </div>
 
-                <h3 className="text-lg font-bold tracking-tight text-(--md-sys-color-on-surface)">
-                  {step.title}
-                </h3>
-
-                <p className="text-xs leading-relaxed font-normal text-(--md-sys-color-on-surface-variant) sm:text-sm">
-                  {step.description}
-                </p>
-              </div>
-
-              {/* Progress Line Dot */}
-              <div className="mt-4 flex items-center gap-2 border-t border-(--md-sys-color-outline-variant)/60 pt-6">
-                <span
-                  className="h-2 w-2 rounded-full bg-(--md-sys-color-primary)"
-                  aria-hidden="true"
-                />
-                <span className="text-[11px] font-semibold tracking-wider text-(--md-sys-color-on-surface-variant) uppercase">
-                  Phase {step.number}
-                </span>
-              </div>
-            </Card>
-          )
-        })}
+                {/* Progress Milestone Badge */}
+                <div className="mt-6 flex items-center justify-between border-t border-(--md-sys-color-outline-variant)/60 pt-4">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-(--md-sys-color-surface-container-high) px-3 py-1 text-xs font-semibold text-(--md-sys-color-on-surface-variant)">
+                    <span
+                      className="h-1.5 w-1.5 rounded-full bg-(--md-sys-color-primary)"
+                      aria-hidden="true"
+                    />
+                    Phase {step.number}
+                  </span>
+                  <span className="text-xs font-medium text-(--md-sys-color-outline)">
+                    Sprint {(idx + 1) * 2}w
+                  </span>
+                </div>
+              </article>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

@@ -19,10 +19,11 @@ interface NavbarProps {
   isDark: boolean
 }
 
-export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
+export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [showThemeMenu, setShowThemeMenu] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
   const sentinelRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -35,6 +36,29 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
 
     if (sentinelRef.current) observer.observe(sentinelRef.current)
     return () => observer.disconnect()
+  }, [])
+
+  // Active section scroll spy
+  useEffect(() => {
+    const sectionIds = ['home', 'about', 'services', 'workflow', 'portfolio', 'team', 'contact-cta']
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const id = sectionIds[i]
+        const el = document.getElementById(id === 'contact-cta' ? 'contact-cta' : id)
+        if (el) {
+          const top = el.offsetTop
+          if (scrollPosition >= top) {
+            setActiveSection(id === 'contact-cta' ? 'contact' : id)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const scrollTo = (id: string) => {
@@ -91,15 +115,22 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
 
         {/* Desktop Links */}
         <div className="hidden items-center gap-1 text-sm font-medium text-(--md-sys-color-on-surface) lg:flex">
-          {navLinks.map((item) => (
-            <button
-              key={item.target}
-              onClick={() => scrollTo(item.target)}
-              className="cursor-pointer rounded-full px-3.5 py-2 text-xs font-semibold transition-colors duration-200 hover:bg-(--md-sys-color-surface-container-high) hover:text-(--md-sys-color-primary) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none"
-            >
-              {item.label}
-            </button>
-          ))}
+          {navLinks.map((item) => {
+            const isActive = activeSection === item.target
+            return (
+              <button
+                key={item.target}
+                onClick={() => scrollTo(item.target)}
+                className={`cursor-pointer rounded-full px-3.5 py-2.5 min-h-[44px] text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none ${
+                  isActive
+                    ? 'bg-(--md-sys-color-primary-container) text-(--md-sys-color-on-primary-container) shadow-xs'
+                    : 'hover:bg-(--md-sys-color-surface-container-high) hover:text-(--md-sys-color-primary)'
+                }`}
+              >
+                {item.label}
+              </button>
+            )
+          })}
         </div>
 
         {/* Actions (Theme Toggle & CTA) */}
@@ -107,7 +138,7 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
           <div className="relative">
             <button
               onClick={() => setShowThemeMenu(!showThemeMenu)}
-              className="flex cursor-pointer items-center gap-1.5 rounded-full border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) p-2.5 text-(--md-sys-color-primary) shadow-sm transition-all duration-200 hover:scale-105 hover:bg-(--md-sys-color-surface-container-high) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none active:scale-95"
+              className="flex cursor-pointer items-center justify-center gap-1.5 rounded-full border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) min-h-[44px] min-w-[44px] px-3 text-(--md-sys-color-primary) shadow-sm transition-all duration-200 hover:scale-105 hover:bg-(--md-sys-color-surface-container-high) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none active:scale-95"
               aria-label="Change theme"
             >
               {theme === 'dark' ? (
@@ -151,7 +182,7 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="cursor-pointer rounded-full p-2 text-(--md-sys-color-on-surface) hover:bg-(--md-sys-color-surface-container-high) lg:hidden"
+            className="flex cursor-pointer items-center justify-center rounded-full min-h-[44px] min-w-[44px] p-2.5 text-(--md-sys-color-on-surface) hover:bg-(--md-sys-color-surface-container-high) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none lg:hidden"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? (
@@ -167,11 +198,7 @@ export function Navbar({ theme, onToggleTheme, isDark }: NavbarProps) {
       {mobileMenuOpen && (
         <nav
           aria-label="Mobile Navigation"
-          className={`m3-glass-nav mx-auto mt-2 max-w-6xl rounded-3xl border p-6 shadow-2xl transition-all lg:hidden ${
-            isDark
-              ? 'border-[#49454f]/80 bg-[#1e1a24]/95'
-              : 'border-[#cac4d0]/80 bg-[#fdf8fd]/95'
-          }`}
+          className="m3-glass-nav mx-auto mt-2 max-w-6xl rounded-3xl border border-(--md-sys-color-outline-variant)/80 bg-(--md-sys-color-surface)/95 p-6 shadow-2xl backdrop-blur-xl transition-all lg:hidden"
         >
           <div className="flex flex-col gap-2">
             {navLinks.map((item) => (

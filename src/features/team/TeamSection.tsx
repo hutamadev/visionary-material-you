@@ -100,9 +100,9 @@ export function TeamSection() {
               <div className="mt-6 flex w-full items-center justify-center gap-2.5 border-t border-(--md-sys-color-outline-variant) pt-6">
                 <motion.a
                   href={member.social.github ?? '#'}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-(--md-sys-color-surface-container-high) text-(--md-sys-color-on-surface-variant)"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-(--md-sys-color-surface-container-high) text-(--md-sys-color-on-surface-variant) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none"
                   whileHover={{
-                    scale: 1.2,
+                    scale: 1.15,
                     color: 'var(--md-sys-color-primary)',
                   }}
                   whileTap={{ scale: 0.9 }}
@@ -113,9 +113,9 @@ export function TeamSection() {
                 </motion.a>
                 <motion.a
                   href={member.social.linkedin ?? '#'}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-(--md-sys-color-surface-container-high) text-(--md-sys-color-on-surface-variant)"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-(--md-sys-color-surface-container-high) text-(--md-sys-color-on-surface-variant) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none"
                   whileHover={{
-                    scale: 1.2,
+                    scale: 1.15,
                     color: 'var(--md-sys-color-primary)',
                   }}
                   whileTap={{ scale: 0.9 }}
@@ -126,9 +126,9 @@ export function TeamSection() {
                 </motion.a>
                 <motion.a
                   href={member.social.twitter ?? '#'}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-(--md-sys-color-surface-container-high) text-(--md-sys-color-on-surface-variant)"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-(--md-sys-color-surface-container-high) text-(--md-sys-color-on-surface-variant) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none"
                   whileHover={{
-                    scale: 1.2,
+                    scale: 1.15,
                     color: 'var(--md-sys-color-primary)',
                   }}
                   whileTap={{ scale: 0.9 }}
