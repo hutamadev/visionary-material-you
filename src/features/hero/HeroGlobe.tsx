@@ -215,7 +215,7 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
         }
 
         animationFrameId = requestAnimationFrame(animate)
-        if (!isVisible) return
+        if (!isVisible || document.hidden) return
 
         const elapsedTime = (performance.now() - startTime) * 0.001
 

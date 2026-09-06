@@ -130,12 +130,18 @@ export function CtaSection() {
               <p
                 id="cta-email-error"
                 role="alert"
+                aria-live="assertive"
                 className="flex items-center justify-center gap-1.5 pt-1 text-xs font-semibold text-rose-500 dark:text-rose-300"
               >
                 <AlertCircle className="h-3.5 w-3.5" aria-hidden="true" />
                 <span>{errorMessage}</span>
               </p>
             )}
+
+            {/* Screen Reader Live Region for Form Status */}
+            <div role="status" aria-live="polite" className="sr-only">
+              {submitted ? 'Thank you. Your consultation request has been received. Our engineering team will contact you within 24 hours.' : ''}
+            </div>
           </form>
 
           {/* Value Badges */}

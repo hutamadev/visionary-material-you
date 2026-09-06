@@ -58,7 +58,7 @@ export class ErrorBoundary extends Component<
 
             <button
               onClick={this.handleReset}
-              className="inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-(--md-sys-color-primary) text-sm font-semibold text-(--md-sys-color-on-primary) shadow-md transition-all hover:opacity-90 active:scale-95"
+              className="inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-(--md-sys-color-primary) text-sm font-semibold text-(--md-sys-color-on-primary) shadow-md transition-all hover:opacity-90 focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:ring-offset-2 focus-visible:outline-none active:scale-95"
             >
               <RefreshCw className="h-4 w-4" />
               <span>Reload Application</span>
