@@ -181,17 +181,25 @@ export function HeroGlobe({ isDark }: HeroGlobeProps) {
 
       const onCanvasLeave = () => {
         if (interactionStartTime !== null && !hasTrackedInteraction) {
-          const durationSeconds = Math.round((performance.now() - interactionStartTime) / 1000)
+          const durationSeconds = Math.round(
+            (performance.now() - interactionStartTime) / 1000
+          )
           if (durationSeconds >= 1) {
-            trackEvent('globe_interaction_duration', { duration_seconds: durationSeconds })
+            trackEvent('globe_interaction_duration', {
+              duration_seconds: durationSeconds,
+            })
             hasTrackedInteraction = true
           }
           interactionStartTime = null
         }
       }
 
-      currentMount.addEventListener('mouseenter', onCanvasEnter, { passive: true })
-      currentMount.addEventListener('mouseleave', onCanvasLeave, { passive: true })
+      currentMount.addEventListener('mouseenter', onCanvasEnter, {
+        passive: true,
+      })
+      currentMount.addEventListener('mouseleave', onCanvasLeave, {
+        passive: true,
+      })
 
       // Viewport Intersection Observer
       const observer = new IntersectionObserver(

@@ -241,9 +241,7 @@ export function FooterSection() {
 
         {/* Bottom Bar: Copyright & Socials */}
         <div className="flex flex-col items-center justify-between gap-4 border-t border-(--md-sys-color-outline-variant) pt-8 text-xs text-(--md-sys-color-on-surface-variant) sm:flex-row">
-          <div>
-            © 2026 Visionary Tech Solutions. All rights reserved.
-          </div>
+          <div>© 2026 Visionary Tech Solutions. All rights reserved.</div>
 
           <div className="flex items-center gap-3">
             <a

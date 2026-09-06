@@ -6,19 +6,19 @@ Date: 2026-09-05
 
 ## Design Health Score
 
-| # | Heuristic | Score | Key Issue |
-|---|-----------|:-----:|-----------|
-| 1 | Visibility of System Status | 3/4 | Navbar lacks active scroll-spy indicator for current section |
-| 2 | Match System / Real World | 3/4 | Jargon mixes enterprise web engineering with generic SaaS buzzwords |
-| 3 | User Control and Freedom | 2/4 | No toggle for continuous starfield particles or 3D globe animation loop |
-| 4 | Consistency and Standards | 2/4 | Brand split: "Visionary" vs "Vibecoding"; radius tokens mixed (8px, 24px, 40px) |
-| 5 | Error Prevention | 3/4 | Zod email validation active on single input field |
-| 6 | Recognition Rather Than Recall | 3/4 | Icons clear, but sticky navbar lacks active state position feedback |
-| 7 | Flexibility and Efficiency | n/a | Persuade / showcase surface (no search/filter workflows required) |
-| 8 | Aesthetic and Minimalist Design | 2/4 | 6 floating blurred orbs, starfield canvas, and kicker chips on every header |
-| 9 | Error Recovery | 3/4 | Inline error message present on CTA form |
-| 10 | Help and Documentation | n/a | Marketing / agency showcase landing page |
-| **Total** | | **21/32** | **Good (14-23/32 band)** |
+| #         | Heuristic                       |   Score   | Key Issue                                                                       |
+| --------- | ------------------------------- | :-------: | ------------------------------------------------------------------------------- |
+| 1         | Visibility of System Status     |    3/4    | Navbar lacks active scroll-spy indicator for current section                    |
+| 2         | Match System / Real World       |    3/4    | Jargon mixes enterprise web engineering with generic SaaS buzzwords             |
+| 3         | User Control and Freedom        |    2/4    | No toggle for continuous starfield particles or 3D globe animation loop         |
+| 4         | Consistency and Standards       |    2/4    | Brand split: "Visionary" vs "Vibecoding"; radius tokens mixed (8px, 24px, 40px) |
+| 5         | Error Prevention                |    3/4    | Zod email validation active on single input field                               |
+| 6         | Recognition Rather Than Recall  |    3/4    | Icons clear, but sticky navbar lacks active state position feedback             |
+| 7         | Flexibility and Efficiency      |    n/a    | Persuade / showcase surface (no search/filter workflows required)               |
+| 8         | Aesthetic and Minimalist Design |    2/4    | 6 floating blurred orbs, starfield canvas, and kicker chips on every header     |
+| 9         | Error Recovery                  |    3/4    | Inline error message present on CTA form                                        |
+| 10        | Help and Documentation          |    n/a    | Marketing / agency showcase landing page                                        |
+| **Total** |                                 | **21/32** | **Good (14-23/32 band)**                                                        |
 
 ## Design Specificity Verdict
 
@@ -39,24 +39,24 @@ A technically solid prototype with responsive WebGL 3D and strict Material 3 col
 ## Priority Issues
 
 - **[P0] Brand Identity Dissonance**: Navbar displays "Vibecoding" with pulsing dot, while page title, meta, and `PRODUCT.md` commit to "Visionary". Erode credibility for enterprise buyers.  
-  *Fix*: Unify branding across `Navbar.tsx`, `HeroSection.tsx`, and copy to "Visionary".  
-  *Suggested Command*: `$impeccable clarify src/features/navbar/Navbar.tsx`
+  _Fix_: Unify branding across `Navbar.tsx`, `HeroSection.tsx`, and copy to "Visionary".  
+  _Suggested Command_: `$impeccable clarify src/features/navbar/Navbar.tsx`
 
 - **[P1] Focus-Visible Ring Stripped Globally**: `button.variants.ts` declares `outline-none` without providing `focus-visible:ring-2`. Renders entire site inaccessible for keyboard-only navigation.  
-  *Fix*: Add `focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none` to base button variants.  
-  *Suggested Command*: `$impeccable polish src/components/ui/button.variants.ts`
+  _Fix_: Add `focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none` to base button variants.  
+  _Suggested Command_: `$impeccable polish src/components/ui/button.variants.ts`
 
 - **[P1] AI Slop Motifs (Orbs & Eyebrow Chips)**: 6 radial gradient orbs with heavy blur and repetitive badge kickers placed above every single heading create generic template visual noise.  
-  *Fix*: Remove artificial background orbs and reserve eyebrow badges exclusively for the Hero and CTA.  
-  *Suggested Command*: `$impeccable distill src/App.tsx`
+  _Fix_: Remove artificial background orbs and reserve eyebrow badges exclusively for the Hero and CTA.  
+  _Suggested Command_: `$impeccable distill src/App.tsx`
 
 - **[P2] Touch Target Sizes Below 44px**: Social links (32px), theme toggle (36px), and nav links (28px) violate WCAG 2.5.5 touch target minimums.  
-  *Fix*: Increase touch target padding or minimum bounding box to 44px.  
-  *Suggested Command*: `$impeccable adapt src/features/navbar/Navbar.tsx`
+  _Fix_: Increase touch target padding or minimum bounding box to 44px.  
+  _Suggested Command_: `$impeccable adapt src/features/navbar/Navbar.tsx`
 
 - **[P2] Continuous Canvas Animation Bypasses Reduced Motion**: `HeroGlobe` Three.js and `StarfieldBackground` run continuous `requestAnimationFrame` loops without checking `prefers-reduced-motion`.  
-  *Fix*: Pause rotation/particle movement when reduced-motion is requested.  
-  *Suggested Command*: `$impeccable harden src/features/hero/HeroGlobe.tsx`
+  _Fix_: Pause rotation/particle movement when reduced-motion is requested.  
+  _Suggested Command_: `$impeccable harden src/features/hero/HeroGlobe.tsx`
 
 ## Persona Red Flags
 

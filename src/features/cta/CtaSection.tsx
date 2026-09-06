@@ -141,7 +141,9 @@ export function CtaSection() {
 
             {/* Screen Reader Live Region for Form Status */}
             <div role="status" aria-live="polite" className="sr-only">
-              {submitted ? 'Thank you. Your consultation request has been received. Our engineering team will contact you within 24 hours.' : ''}
+              {submitted
+                ? 'Thank you. Your consultation request has been received. Our engineering team will contact you within 24 hours.'
+                : ''}
             </div>
 
             {/* Visual Success Confirmation Banner */}
@@ -152,7 +154,10 @@ export function CtaSection() {
                 transition={{ type: 'spring', stiffness: 450, damping: 25 }}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-(--md-sys-color-outline-variant)/40 bg-(--md-sys-color-surface)/90 px-5 py-2.5 text-xs font-semibold text-(--md-sys-color-on-surface) shadow-sm backdrop-blur-md"
               >
-                <CheckCircle className="h-4 w-4 text-emerald-500" aria-hidden="true" />
+                <CheckCircle
+                  className="h-4 w-4 text-emerald-500"
+                  aria-hidden="true"
+                />
                 <span>Inquiry received! We'll reply within 24 hours.</span>
               </motion.div>
             )}

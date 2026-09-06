@@ -8,19 +8,46 @@
         "role": "primary",
         "displayName": "Iris Lavender",
         "canonical": "oklch(48% 0.18 290)",
-        "tonalRamp": ["#21005d", "#381e72", "#4f378b", "#6750a4", "#8069bd", "#9a82d7", "#b59cf2", "#d0bcff"]
+        "tonalRamp": [
+          "#21005d",
+          "#381e72",
+          "#4f378b",
+          "#6750a4",
+          "#8069bd",
+          "#9a82d7",
+          "#b59cf2",
+          "#d0bcff"
+        ]
       },
       "secondary": {
         "role": "secondary",
         "displayName": "Slate Violet",
         "canonical": "oklch(45% 0.05 295)",
-        "tonalRamp": ["#1d192b", "#332d41", "#4a4458", "#625b71", "#7b738b", "#958da5", "#b0a8c0", "#ccc2dc"]
+        "tonalRamp": [
+          "#1d192b",
+          "#332d41",
+          "#4a4458",
+          "#625b71",
+          "#7b738b",
+          "#958da5",
+          "#b0a8c0",
+          "#ccc2dc"
+        ]
       },
       "surface": {
         "role": "neutral",
         "displayName": "M3 Surface Container",
         "canonical": "oklch(96% 0.01 300)",
-        "tonalRamp": ["#0f0d13", "#141218", "#1d1b20", "#211f26", "#ece6f0", "#f3edf7", "#f7f2fa", "#fdf8fd"]
+        "tonalRamp": [
+          "#0f0d13",
+          "#141218",
+          "#1d1b20",
+          "#211f26",
+          "#ece6f0",
+          "#f3edf7",
+          "#f7f2fa",
+          "#fdf8fd"
+        ]
       }
     },
     "typographyMeta": {
@@ -102,11 +129,31 @@
       "Zero AI Slop: Tipografi fungsional berhierarki tegas, palet warna harmonis berbasis tonal ramps, dan mikro-interaksi spring terkalibrasi."
     ],
     "rules": [
-      { "name": "The Strict Tonal Role Rule", "body": "Dilarang menggunakan warna aksen primer di luar komponen aksi langsung (CTA, link aktif, pill terpilih). Seluruh permukaan latar wajib menggunakan deret surface-container-*.", "section": "colors" },
-      { "name": "The No-Unanchored-Gradient Rule", "body": "Dilarang menambahkan linear gradient dekoratif tanpa sumber cahaya kontekstual.", "section": "colors" },
-      { "name": "The Surgical Weight Rule", "body": "Maksimal 3 tingkatan bobot tipografi dalam satu viewport (800/700 untuk judul, 600 untuk label/interaksi, 400 untuk teks isi).", "section": "typography" },
-      { "name": "The Single Momentum Rule", "body": "Dilarang membuat kontainer dengan internal scrolling vertikal di dalam halaman kecuali modal dialog.", "section": "layout" },
-      { "name": "The Tonal Layering Rule", "body": "Elevasi wajib dicapai melalui perpindahan tingkat kontainer (low → container → high), bukan dengan mempertebal bayangan hitam pekat.", "section": "elevation" }
+      {
+        "name": "The Strict Tonal Role Rule",
+        "body": "Dilarang menggunakan warna aksen primer di luar komponen aksi langsung (CTA, link aktif, pill terpilih). Seluruh permukaan latar wajib menggunakan deret surface-container-*.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Unanchored-Gradient Rule",
+        "body": "Dilarang menambahkan linear gradient dekoratif tanpa sumber cahaya kontekstual.",
+        "section": "colors"
+      },
+      {
+        "name": "The Surgical Weight Rule",
+        "body": "Maksimal 3 tingkatan bobot tipografi dalam satu viewport (800/700 untuk judul, 600 untuk label/interaksi, 400 untuk teks isi).",
+        "section": "typography"
+      },
+      {
+        "name": "The Single Momentum Rule",
+        "body": "Dilarang membuat kontainer dengan internal scrolling vertikal di dalam halaman kecuali modal dialog.",
+        "section": "layout"
+      },
+      {
+        "name": "The Tonal Layering Rule",
+        "body": "Elevasi wajib dicapai melalui perpindahan tingkat kontainer (low → container → high), bukan dengan mempertebal bayangan hitam pekat.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do gunakan token CSS native var(--md-sys-color-*) untuk semua penetapan warna.",

@@ -12,7 +12,7 @@ const Separator = React.forwardRef<
     role="separator"
     className={cn(
       'shrink-0 bg-(--md-sys-color-outline-variant) opacity-60',
-      orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
+      orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
       className
     )}
     {...props}

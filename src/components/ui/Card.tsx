@@ -24,7 +24,7 @@ export const Card = React.forwardRef<HTMLElement, CardProps>(
     return React.createElement(Tag, {
       ref,
       className: cn(
-        'rounded-3xl min-w-0 break-words p-6 text-(--md-sys-color-on-surface) transition-all duration-300 sm:p-8',
+        'min-w-0 rounded-3xl p-6 wrap-break-word text-(--md-sys-color-on-surface) transition-all duration-300 sm:p-8',
         variantStyles[variant],
         className
       ),
@@ -53,7 +53,7 @@ export const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      'text-xl font-bold tracking-tight break-words text-(--md-sys-color-on-surface)',
+      'text-xl font-bold tracking-tight wrap-break-word text-(--md-sys-color-on-surface)',
       className
     )}
     {...props}

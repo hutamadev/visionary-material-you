@@ -28,6 +28,7 @@ Membangun "Visionary", sebuah aplikasi web modern berskala enterprise yang mengo
 ### Sesi 29 Agustus 2026 (21 conversations, 6+ jam kerja)
 
 #### 1. Dynamic Theme System (`feature/dynamic-theme`)
+
 - **3-State Theme Toggle**: Implementasi sistem tema dinamis dengan 3 mode: Light, Dark, dan System (mengikuti preferensi OS via `prefers-color-scheme`).
 - **Hook `useTheme`**: Refaktor hook tema untuk mendukung reaktivitas terhadap perubahan preferensi sistem secara _real-time_ via `matchMedia` listener.
 - **Navbar Integration**: Integrasi toggle tema di Navbar dengan ikon yang berubah sesuai mode aktif.
@@ -35,6 +36,7 @@ Membangun "Visionary", sebuah aplikasi web modern berskala enterprise yang mengo
 - **E2E Tests Update**: Memperbarui test Playwright (`app.spec.ts`, `performance.spec.ts`) agar kompatibel dengan fitur tema baru.
 
 #### 2. UX Polish & Micro-Interactions (`feature/ux-polish`)
+
 - **Card Micro-Interactions**: Menambahkan animasi Framer Motion (spring `whileHover` scale/translate, staggered `whileInView` entrance) pada komponen `PortfolioSection`, `ServicesSection`, dan `TeamSection`.
 - **Parallax Polish**: Sinkronisasi Lenis smooth scroll dengan Framer Motion `useScroll` untuk efek parallax yang lebih halus.
 - **`StarfieldBackground` Component**: Membuat komponen baru `StarfieldBackground.tsx` (animasi canvas starfield) untuk ambient visual di background.
@@ -43,21 +45,25 @@ Membangun "Visionary", sebuah aplikasi web modern berskala enterprise yang mengo
 - **Konsolidasi Task Files**: Merge `TASK2.md` ke dalam `TASK.md`, hapus `TASK2.md`.
 
 #### 3. Tailwind CSS v4 Syntax Migration
+
 - **Lint Warning Fixes (Manual)**: Fix satu per satu lint warnings Tailwind v4 di ~10+ conversation kecil — migrasi syntax `[var(--...)]` → `(--...)`, `flex-shrink-0` → `shrink-0`, `-z-0` → `z-0`, dsb.
 - **Automated Migration Script**: Pembuatan `scripts/fix-tailwind-syntax.mjs` untuk migrasi massal otomatis di seluruh codebase (42 file, ~1.660 baris berubah).
 - **Komponen UI Refaktor**: Polish pada `Avatar`, `Badge`, `Button`, `Card`, `Input`, `Separator`, dan `button.variants.ts` — migrasi syntax + perbaikan styling.
 - **Section-level Refaktor**: Update styling/layout pada `AboutSection`, `CtaSection`, `FooterSection`, `HeroSection`, `HeroGlobe`, `Navbar`, `PortfolioSection`, `ServicesSection`, `TeamSection`, `TestimonialsSection`, `WorkflowSection`.
 
 #### 4. Lenis Smooth Scroll Navigation Fix
+
 - **Bug**: Setelah refaktor UX polish, klik menu Navbar tidak lagi scroll ke section yang dituju.
 - **Fix**: Refaktor `useSmoothScroll.ts` (69 baris perubahan) agar anchor link (`#section`) bekerja benar dengan Lenis.
 
 #### 5. Dependency Updates & Font Optimization
+
 - **Dependency Audit**: Update dependensi proyek, evaluasi upgrade TypeScript ke v7 (ditunda karena kompatibilitas).
 - **Variable Font Migration**: Migrasi font Inter dari multi-file static fonts ke single variable font — mengurangi jumlah file font di `dist/`.
 - **Tailwind CSS Linting Rules**: Setup linting rules agar Tailwind class warnings ter-_autofix_.
 
 #### 6. Infrastructure & Tooling
+
 - **`.prettierrc`**: Menambahkan konfigurasi Prettier baru.
 - **`index.html` SEO Enhancement**: Update metadata, Open Graph tags, dan structured data.
 - **Accessibility & SEO E2E Tests**: Penambahan/refaktor test `accessibility-seo.spec.ts` (60+ baris baru).
@@ -67,6 +73,7 @@ Membangun "Visionary", sebuah aplikasi web modern berskala enterprise yang mengo
 ### Sesi 30 Agustus 2026
 
 #### 1. Phase 4.3: Telemetry & Analytics (`feature/telemetry-analytics`)
+
 - **Vercel Analytics + Speed Insights**: Install `@vercel/analytics@2.0.1` + `@vercel/speed-insights@2.0.0`. Root integration di `main.tsx` (`<Analytics />` + `<SpeedInsights />`).
 - **Type-safe Analytics Abstraction**: `src/lib/analytics.ts` — generic `trackEvent<K>()` wrapper dengan `AnalyticsEventMap` interface. Provider-agnostic, swap cukup edit 1 file.
 - **Custom Event Tracking**:

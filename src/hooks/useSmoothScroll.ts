@@ -25,7 +25,10 @@ export function scrollToTarget(
       lenisInstance.scrollTo(0, { duration, immediate: prefersReducedMotion })
       return
     }
-    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    })
     return
   }
 
