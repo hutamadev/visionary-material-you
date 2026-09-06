@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import {
   Sun,
   Moon,
@@ -141,18 +142,26 @@ export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
               className="flex cursor-pointer items-center justify-center gap-1.5 rounded-full border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) min-h-[44px] min-w-[44px] px-3 text-(--md-sys-color-primary) shadow-sm transition-all duration-200 hover:scale-105 hover:bg-(--md-sys-color-surface-container-high) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none active:scale-95"
               aria-label="Change theme"
             >
-              {theme === 'dark' ? (
-                <Moon className="h-4 w-4" />
-              ) : theme === 'light' ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Monitor className="h-4 w-4" />
-              )}
+              <motion.div
+                key={theme}
+                initial={{ scale: 0.7, rotate: -30 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+                className="flex items-center justify-center"
+              >
+                {theme === 'dark' ? (
+                  <Moon className="h-4 w-4" />
+                ) : theme === 'light' ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Monitor className="h-4 w-4" />
+                )}
+              </motion.div>
               <ChevronDown className="h-3 w-3 opacity-60" />
             </button>
 
             {showThemeMenu && (
-              <div className="absolute top-full right-0 z-50 mt-3 w-32 overflow-hidden rounded-lg border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) py-1 shadow-lg">
+              <div className="absolute top-full right-0 z-50 mt-3 w-36 overflow-hidden rounded-2xl border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) p-1.5 shadow-xl">
                 {(['light', 'dark', 'system'] as Theme[]).map((t) => (
                   <button
                     key={t}
@@ -160,9 +169,16 @@ export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
                       onToggleTheme(t)
                       setShowThemeMenu(false)
                     }}
-                    className={`w-full px-4 py-2 text-left text-xs font-medium capitalize transition-colors hover:bg-(--md-sys-color-surface-container-high) ${theme === t ? 'text-(--md-sys-color-primary)' : 'text-(--md-sys-color-on-surface)'}`}
+                    className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 min-h-[40px] text-left text-xs font-semibold capitalize transition-all hover:bg-(--md-sys-color-surface-container-high) ${
+                      theme === t
+                        ? 'text-(--md-sys-color-primary) bg-(--md-sys-color-primary-container)/40'
+                        : 'text-(--md-sys-color-on-surface)'
+                    }`}
                   >
-                    {t}
+                    <span>{t}</span>
+                    {theme === t && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-(--md-sys-color-primary)" aria-hidden="true" />
+                    )}
                   </button>
                 ))}
               </div>
