@@ -28,6 +28,8 @@ export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
   const [activeSection, setActiveSection] = useState('home')
   const sentinelRef = useRef<HTMLDivElement>(null)
   const themeMenuRef = useRef<HTMLDivElement>(null)
+  const isClickingRef = useRef(false)
+  const clickTimeoutRef = useRef<number | null>(null)
 
   // Click outside to close theme dropdown
   useEffect(() => {
@@ -63,17 +65,26 @@ export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
       'portfolio',
       'team',
       'contact-cta',
+      'contact',
     ]
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const id = sectionIds[i]
-        const el = document.getElementById(
-          id === 'contact-cta' ? 'contact-cta' : id
-        )
+      if (isClickingRef.current) return
+
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 60
+      ) {
+        setActiveSection('contact')
+        return
+      }
+
+      const anchor = 250
+      for (const id of sectionIds) {
+        const el = document.getElementById(id)
         if (el) {
-          const top = el.offsetTop
-          if (scrollPosition >= top) {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= anchor && rect.bottom > anchor) {
             setActiveSection(id === 'contact-cta' ? 'contact' : id)
             break
           }
@@ -87,7 +98,13 @@ export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
   }, [])
 
   const scrollTo = (id: string) => {
+    setActiveSection(id)
     setMobileMenuOpen(false)
+    isClickingRef.current = true
+    if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current)
+    clickTimeoutRef.current = window.setTimeout(() => {
+      isClickingRef.current = false
+    }, 1000)
     scrollToTarget(id)
   }
 
@@ -146,13 +163,20 @@ export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
               <button
                 key={item.target}
                 onClick={() => scrollTo(item.target)}
-                className={`min-h-11 cursor-pointer rounded-full px-3.5 py-2.5 text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none ${
+                className={`relative min-h-11 cursor-pointer rounded-full px-4 py-2.5 text-xs font-semibold transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none ${
                   isActive
-                    ? 'bg-(--md-sys-color-primary-container) text-(--md-sys-color-on-primary-container) shadow-xs'
-                    : 'hover:bg-(--md-sys-color-surface-container-high) hover:text-(--md-sys-color-primary)'
+                    ? 'text-(--md-sys-color-on-primary-container)'
+                    : 'text-(--md-sys-color-on-surface) hover:text-(--md-sys-color-primary)'
                 }`}
               >
-                {item.label}
+                {isActive && (
+                  <motion.div
+                    layoutId="navbar-active-pill"
+                    className="absolute inset-0 -z-10 rounded-full bg-(--md-sys-color-primary-container) shadow-xs"
+                    transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                  />
+                )}
+                <span className="relative z-10">{item.label}</span>
               </button>
             )
           })}
@@ -264,15 +288,22 @@ export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
           className="m3-glass-nav mx-auto mt-2 max-w-6xl rounded-3xl border border-(--md-sys-color-outline-variant)/80 bg-(--md-sys-color-surface)/95 p-6 shadow-2xl backdrop-blur-xl transition-all lg:hidden"
         >
           <div className="flex flex-col gap-2">
-            {navLinks.map((item) => (
-              <button
-                key={item.target}
-                onClick={() => scrollTo(item.target)}
-                className="rounded-2xl px-4 py-2.5 text-left text-sm font-semibold text-(--md-sys-color-on-surface) hover:bg-(--md-sys-color-surface-container-high)"
-              >
-                {item.label}
-              </button>
-            ))}
+            {navLinks.map((item) => {
+              const isActive = activeSection === item.target
+              return (
+                <button
+                  key={item.target}
+                  onClick={() => scrollTo(item.target)}
+                  className={`rounded-2xl px-4 py-2.5 text-left text-sm font-semibold transition-all ${
+                    isActive
+                      ? 'bg-(--md-sys-color-primary-container) text-(--md-sys-color-on-primary-container)'
+                      : 'text-(--md-sys-color-on-surface) hover:bg-(--md-sys-color-surface-container-high)'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              )
+            })}
             <div className="border-t border-(--md-sys-color-outline-variant) pt-3">
               <Button
                 variant="default"
