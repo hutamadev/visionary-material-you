@@ -1,4 +1,8 @@
 import { defineConfig, devices } from '@playwright/test'
+import fs from 'node:fs'
+
+const heliumWindows = 'C:\\Program Files\\imput\\Helium\\Application\\chrome.exe'
+const defaultChrome = fs.existsSync(heliumWindows) ? heliumWindows : undefined
 
 export default defineConfig({
   testDir: './e2e',
@@ -18,6 +22,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         launchOptions: {
+          executablePath: process.env.PLAYWRIGHT_CHROME_PATH || defaultChrome,
           args: [
             '--use-gl=angle',
             '--use-angle=swiftshader',
@@ -28,9 +33,11 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: 'bun run dev --port 5173',
-    url: 'http://localhost:5173',
-    reuseExistingServer: true,
-  },
+  webServer: process.env.PLAYWRIGHT_SKIP_WEBSERVER
+    ? undefined
+    : {
+        command: 'bun run dev --port 5173',
+        url: 'http://localhost:5173',
+        reuseExistingServer: true,
+      },
 })
