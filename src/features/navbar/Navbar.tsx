@@ -9,6 +9,7 @@ import {
   Sparkles,
   ArrowRight,
   ChevronDown,
+  Check,
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { scrollToTarget } from '@/hooks/useSmoothScroll'
@@ -26,6 +27,19 @@ export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
   const [showThemeMenu, setShowThemeMenu] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const sentinelRef = useRef<HTMLDivElement>(null)
+  const themeMenuRef = useRef<HTMLDivElement>(null)
+
+  // Click outside to close theme dropdown
+  useEffect(() => {
+    if (!showThemeMenu) return
+    const handleClickOutside = (e: MouseEvent) => {
+      if (themeMenuRef.current && !themeMenuRef.current.contains(e.target as Node)) {
+        setShowThemeMenu(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [showThemeMenu])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -146,11 +160,12 @@ export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
 
         {/* Actions (Theme Toggle & CTA) */}
         <div className="relative flex items-center gap-2.5">
-          <div className="relative">
+          <div ref={themeMenuRef} className="relative">
             <button
               onClick={() => setShowThemeMenu(!showThemeMenu)}
               className="flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-1.5 rounded-full border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) px-3 text-(--md-sys-color-primary) shadow-sm transition-all duration-200 hover:scale-105 hover:bg-(--md-sys-color-surface-container-high) focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none active:scale-95"
               aria-label="Change theme"
+              aria-expanded={showThemeMenu}
             >
               <motion.div
                 key={theme}
@@ -167,34 +182,53 @@ export function Navbar({ theme, onToggleTheme, isDark: _isDark }: NavbarProps) {
                   <Monitor className="h-4 w-4" />
                 )}
               </motion.div>
-              <ChevronDown className="h-3 w-3 opacity-60" />
+              <ChevronDown
+                className={`h-3 w-3 opacity-60 transition-transform duration-200 ${
+                  showThemeMenu ? 'rotate-180' : ''
+                }`}
+              />
             </button>
 
             {showThemeMenu && (
-              <div className="absolute top-full right-0 z-50 mt-3 w-36 overflow-hidden rounded-2xl border border-(--md-sys-color-outline-variant) bg-(--md-sys-color-surface-container) p-1.5 shadow-xl">
-                {(['light', 'dark', 'system'] as Theme[]).map((t) => (
-                  <button
-                    key={t}
-                    onClick={() => {
-                      onToggleTheme(t)
-                      setShowThemeMenu(false)
-                    }}
-                    className={`flex min-h-10 w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-xs font-semibold capitalize transition-all hover:bg-(--md-sys-color-surface-container-high) ${
-                      theme === t
-                        ? 'bg-(--md-sys-color-primary-container)/40 text-(--md-sys-color-primary)'
-                        : 'text-(--md-sys-color-on-surface)'
-                    }`}
-                  >
-                    <span>{t}</span>
-                    {theme === t && (
-                      <span
-                        className="h-1.5 w-1.5 rounded-full bg-(--md-sys-color-primary)"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </button>
-                ))}
-              </div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.94, y: -6 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ type: 'spring', stiffness: 450, damping: 28 }}
+                className="absolute top-full right-0 z-50 mt-2.5 w-48 overflow-hidden rounded-2xl border border-(--md-sys-color-outline-variant)/60 bg-(--md-sys-color-surface)/95 p-1.5 shadow-2xl backdrop-blur-xl"
+              >
+                {[
+                  { type: 'light' as Theme, label: 'Light Mode', icon: Sun },
+                  { type: 'dark' as Theme, label: 'Dark Mode', icon: Moon },
+                  { type: 'system' as Theme, label: 'System Theme', icon: Monitor },
+                ].map(({ type: t, label, icon: Icon }) => {
+                  const isSelected = theme === t
+                  return (
+                    <button
+                      key={t}
+                      onClick={() => {
+                        onToggleTheme(t)
+                        setShowThemeMenu(false)
+                      }}
+                      className={`flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-xs font-semibold transition-all duration-150 focus-visible:ring-2 focus-visible:ring-(--md-sys-color-primary) focus-visible:outline-none ${
+                        isSelected
+                          ? 'bg-(--md-sys-color-primary-container) text-(--md-sys-color-on-primary-container) shadow-xs'
+                          : 'text-(--md-sys-color-on-surface) hover:bg-(--md-sys-color-surface-container-high) hover:text-(--md-sys-color-primary)'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                        <span>{label}</span>
+                      </div>
+                      {isSelected && (
+                        <Check
+                          className="h-3.5 w-3.5 shrink-0 text-(--md-sys-color-on-primary-container)"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </button>
+                  )
+                })}
+              </motion.div>
             )}
           </div>
 
